@@ -3,6 +3,7 @@ import { Outfit, Inter } from 'next/font/google';
 import './globals.css';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
+import { SiteJsonLd } from '@/components/site-jsonld';
 import { business } from '@/data/business';
 
 // next/font lädt die Schriften zur Build-Zeit und hostet sie selbst — keine
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de" className={`${outfit.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col">
+        <SiteJsonLd />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

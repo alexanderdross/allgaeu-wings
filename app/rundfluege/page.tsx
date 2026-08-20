@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { PageHeader } from '@/components/page-header';
 import { RundflugCard } from '@/components/rundflug-card';
-import { rundfluege } from '@/data/flights';
+import { rundfluege, rundfluegeNachKategorie } from '@/data/flights';
 
 export const metadata: Metadata = {
   title: 'Alpen-Rundflüge — Zugspitze, Matterhorn, Bodensee & mehr',
@@ -32,13 +32,20 @@ export default function RundfluegePage() {
         title="Unsere Rundflüge"
         lead="Von der Zugspitze bis zum Mont Blanc — wählen Sie Ihr Ziel und buchen Sie online."
       />
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {rundfluege.map((flug) => (
-            <RundflugCard key={flug.slug} flug={flug} />
-          ))}
-        </div>
-      </section>
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        {rundfluegeNachKategorie().map((group) => (
+          <section key={group.kategorie} className="mb-14 last:mb-0" aria-labelledby={`kat-${group.kategorie}`}>
+            <h2 id={`kat-${group.kategorie}`} className="mb-6 font-heading text-2xl font-bold">
+              {group.label}
+            </h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {group.fluege.map((flug) => (
+                <RundflugCard key={flug.slug} flug={flug} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </>
   );
 }

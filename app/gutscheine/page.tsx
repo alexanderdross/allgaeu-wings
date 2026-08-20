@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Gift, Calendar, CreditCard } from 'lucide-react';
 import { PageHeader } from '@/components/page-header';
-import { Button } from '@/components/ui/button';
+import { CheckoutButton } from '@/components/checkout-button';
 import { Card, CardContent } from '@/components/ui/card';
 import { rundfluege, formatPreis, formatDauer } from '@/data/flights';
 
@@ -45,17 +44,18 @@ export default function GutscheinePage() {
                 <h2 className="font-heading text-lg font-semibold">{flug.name}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">{formatDauer(flug.flugzeitMin)}</p>
                 <p className="mt-4 font-heading text-2xl font-bold text-primary">{formatPreis(flug.preis)}</p>
-                <Button asChild variant="accent" className="mt-4 w-full">
-                  <Link href="/kontakt/anfrage/">Gutschein anfragen</Link>
-                </Button>
+                <div className="mt-4">
+                  <CheckoutButton slug={flug.slug} label="Als Gutschein kaufen" />
+                </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
         <p className="mt-10 rounded-lg border border-border bg-secondary/40 p-5 text-sm text-muted-foreground">
-          Der native Gutschein-Kauf mit Stripe folgt in Phase 3 (siehe docs/07-shop-stripe.md).
-          Bis dahin senden Sie uns bitte eine Anfrage — wir stellen den Gutschein persönlich aus.
+          Der Kauf läuft über den sicheren Stripe-Checkout. Der automatische Versand von
+          Gutscheincode und PDF (Webhook) wird mit dem Shop-Backend aktiviert
+          (siehe docs/07-shop-stripe.md) — bis dahin melden wir uns nach dem Kauf persönlich.
         </p>
       </section>
     </>

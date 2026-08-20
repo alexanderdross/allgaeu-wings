@@ -35,15 +35,24 @@ auf `main` (`pnpm build:cf` → `wrangler deploy`). **Kein GitHub-Actions-Deploy
 **Plan: Workers Paid** (~5 $/Monat) empfohlen – wegen CPU-Zeit pro Request (Stripe-Aufrufe,
 PDF-Erzeugung), R2/KV/D1-Kontingenten und Image Transformations.
 
-### Bindings (`wrangler.jsonc`)
+### Bindings (`wrangler.jsonc`) — phasenweise
 
-| Binding | Typ | Zweck |
-|---|---|---|
-| `ASSETS` | Assets | statische Dateien aus `.open-next/assets` |
-| `NEXT_INC_CACHE_R2_BUCKET` | R2 | ISR/SSG-Cache, in `withRegionalCache` (`long-lived`) gewrappt |
-| `WEBHOOK_IDEMPOTENCY_KV` | KV | Stripe-Webhook-Replay-Guard (24 h TTL) |
-| `DB` | D1 | Gutscheine, Einlösungen, Anfragen, Webhook-Events |
-| `MEDIA` | R2 (optional) | Original-Medien, Videoassets |
+Wichtig: **statische Bilder brauchen kein R2.** Bilder, Fonts und JS/CSS aus `public/` und dem
+Build werden über das **`ASSETS`-Binding** ausgeliefert. R2/KV/D1 sind reine Backend-Bindings für
+spätere Phasen und werden erst dann aktiviert, wenn sie gebraucht werden.
+
+| Binding | Typ | Zweck | Aktiv ab |
+|---|---|---|---|
+| `ASSETS` | Assets | statische Dateien (inkl. **aller Bilder**) aus `.open-next/assets` | **jetzt** |
+| `NEXT_INC_CACHE_R2_BUCKET` | R2 | OpenNext-Seiten-Cache für SSG/ISR (nicht für Medien) | ab spürbarem ISR/revalidate |
+| `WEBHOOK_IDEMPOTENCY_KV` | KV | Stripe-Webhook-Replay-Guard (24 h TTL) | ab Stripe-Webhook (Shop-Backend) |
+| `DB` | D1 | Gutscheine, Einlösungen, Anfragen, Webhook-Events | ab Gutschein-Lifecycle |
+
+Da die Seite aktuell **praktisch vollständig statisch** (SSG) ist, ist `ASSETS` das einzige
+benötigte Binding — das **erste Deploy braucht weder R2- noch KV- noch D1-Namespace**. Die
+Zusatz-Bindings liegen in `wrangler.jsonc` als kommentierte Blöcke bereit; `open-next.config.ts`
+nutzt bis dahin den Standard-Cache (kein R2). Reaktivierung ist je ein Kommentar-Block plus ein
+`wrangler … create`-Aufruf (Runbook Phase 1).
 
 `compatibility_flags: ["nodejs_compat"]`, `compatibility_date >= 2024-09-23` (nötig für Stripe und
 `node:crypto`), `keep_vars: true` (sonst löscht jeder Deploy die im Dashboard gesetzten Vars),

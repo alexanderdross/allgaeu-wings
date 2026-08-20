@@ -3,28 +3,12 @@ import { Plane, Users, Award, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { RundflugCard } from '@/components/rundflug-card';
 import { rundfluege, standorte } from '@/data/flights';
-import { business } from '@/data/business';
 
-const orgJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: business.name,
-  url: business.siteUrl,
-  telephone: business.phone,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: business.street,
-    postalCode: business.zip,
-    addressLocality: business.city,
-    addressCountry: business.country,
-  },
-};
+// Organization/WebSite-JSON-LD wird sitewide über SiteJsonLd (app/layout.tsx) gesetzt.
 
 export default function HomePage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
-
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary to-[#0d2a4a] text-white">
         <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">

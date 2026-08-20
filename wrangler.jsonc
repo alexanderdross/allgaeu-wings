@@ -10,44 +10,44 @@
   "compatibility_date": "2025-04-01",
   "compatibility_flags": ["nodejs_compat"],
 
+  // Statische Assets (Bilder, Fonts, JS/CSS aus public/ und dem Build) werden
+  // über dieses Binding ausgeliefert. Für die aktuell praktisch statische Seite
+  // ist das das EINZIGE benötigte Binding — R2/KV/D1 kommen erst mit ihren
+  // jeweiligen Phasen dazu (siehe unten und docs/01-architektur.md).
   "assets": {
     "binding": "ASSETS",
     "directory": ".open-next/assets"
   },
 
-  // Inkrementeller Cache (SSG/ISR) in R2:
-  //   wrangler r2 bucket create allgaeu-wings-inc-cache
-  "r2_buckets": [
-    {
-      "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "allgaeu-wings-inc-cache"
-    }
-  ],
-
-  // Stripe-Webhook-Idempotenz (24h TTL):
-  //   wrangler kv namespace create WEBHOOK_IDEMPOTENCY_KV
-  "kv_namespaces": [
-    {
-      "binding": "WEBHOOK_IDEMPOTENCY_KV",
-      "id": "REPLACE_WITH_KV_NAMESPACE_ID"
-    }
-  ],
-
-  // Gutscheine/Anfragen (Phase 3):
-  //   wrangler d1 create allgaeu-wings
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "allgaeu-wings",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
-    }
-  ],
-
   "observability": {
     "enabled": true
   },
 
-  // Runtime-Vars (SMTP_*, STRIPE_*, SITE_URL …) werden im Dashboard verwaltet;
+  // Runtime-Vars (STRIPE_*, SITE_URL …) werden im Dashboard verwaltet;
   // keep_vars verhindert, dass jeder Deploy sie löscht.
   "keep_vars": true
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // Zusatz-Bindings – erst reaktivieren, wenn die jeweilige Phase sie braucht.
+  // Statische Bilder brauchen KEIN R2 (sie laufen über ASSETS oben).
+  //
+  // R2 (ab spürbarem ISR/revalidate) – OpenNext-Seiten-Cache. Anlegen:
+  //   wrangler r2 bucket create allgaeu-wings-inc-cache
+  // und in open-next.config.ts den r2IncrementalCache wieder aktivieren.
+  // "r2_buckets": [
+  //   { "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "allgaeu-wings-inc-cache" }
+  // ],
+  //
+  // KV (ab Stripe-Webhook, Phase Shop-Backend) – Webhook-Idempotenz. Anlegen:
+  //   wrangler kv namespace create WEBHOOK_IDEMPOTENCY_KV
+  // "kv_namespaces": [
+  //   { "binding": "WEBHOOK_IDEMPOTENCY_KV", "id": "REPLACE_WITH_KV_NAMESPACE_ID" }
+  // ],
+  //
+  // D1 (ab Gutschein-Lifecycle) – Gutscheine/Anfragen. Anlegen:
+  //   wrangler d1 create allgaeu-wings
+  // "d1_databases": [
+  //   { "binding": "DB", "database_name": "allgaeu-wings", "database_id": "REPLACE_WITH_D1_DATABASE_ID" }
+  // ]
+  // ──────────────────────────────────────────────────────────────────────────
 }

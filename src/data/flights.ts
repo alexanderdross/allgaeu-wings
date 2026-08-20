@@ -192,3 +192,22 @@ export function formatPreis(preis: number): string {
 export function formatDauer(min: number): string {
   return `ca. ${min} min`;
 }
+
+export const kategorieLabels: Record<Kategorie, string> = {
+  alpen: 'Über die Alpen',
+  berg: 'Berge & Gipfel',
+  see: 'Seen & Süden',
+  wunsch: 'Wunschrundflug',
+};
+
+/** Rundflüge nach Kategorie gruppiert, in fester Reihenfolge. */
+export function rundfluegeNachKategorie(): { kategorie: Kategorie; label: string; fluege: Rundflug[] }[] {
+  const order: Kategorie[] = ['berg', 'alpen', 'see', 'wunsch'];
+  return order
+    .map((kategorie) => ({
+      kategorie,
+      label: kategorieLabels[kategorie],
+      fluege: rundfluege.filter((f) => f.kategorie === kategorie),
+    }))
+    .filter((group) => group.fluege.length > 0);
+}
