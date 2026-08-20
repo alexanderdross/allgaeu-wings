@@ -110,3 +110,7 @@ Menü-Schließen, Tastaturnavigation, `prefers-reduced-motion`, Fokus-Ringe (`ri
   `STRIPE_AUTOMATIC_TAX=false` bis geklärt.
 - **Die Alt-Seite hat ein ungültiges TLS-Zertifikat** – nach Cutover über Cloudflare managed.
 - **Bestehende Regiondo-Gutscheine bleiben einlösbar** (Import in D1, Runbook Phase 5).
+- **Bindings phasenweise:** Statische Bilder laufen über `ASSETS`, **nicht** R2. Da die Seite
+  aktuell statisch ist, ist `ASSETS` das einzige aktive Binding; R2 (Seiten-Cache), KV
+  (Webhook-Idempotenz) und D1 (Gutscheine) liegen in `wrangler.jsonc` kommentiert bereit und
+  werden erst mit ihrer Phase aktiviert (`docs/01-architektur.md`).
