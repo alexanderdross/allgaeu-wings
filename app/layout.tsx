@@ -25,6 +25,18 @@ export const metadata: Metadata = {
     locale: 'de_DE',
     siteName: 'Allgäu Wings',
     url: business.siteUrl,
+    images: [{ url: '/og-default.jpg', width: 1200, height: 675, alt: 'Allgäu Wings' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og-default.jpg'],
+  },
+  icons: {
+    icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-icon-180x180.png', sizes: '180x180' }],
   },
 };
 

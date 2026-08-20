@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { mainNav } from '@/lib/nav';
 import { Button } from '@/components/ui/button';
@@ -13,8 +14,9 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-primary text-primary-foreground shadow-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="font-heading text-lg font-bold tracking-wide" aria-label="Allgäu Wings Startseite">
-          ALLGÄU WINGS
+        <Link href="/" className="flex items-center gap-2" aria-label="Allgäu Wings Startseite">
+          <Image src="/logo.png" alt="Allgäu Wings" width={62} height={36} priority className="h-9 w-auto" />
+          <span className="font-heading text-lg font-bold tracking-wide">ALLGÄU WINGS</span>
         </Link>
 
         {/* Desktop-Navigation */}

@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/page-header';
 import { RundflugCard } from '@/components/rundflug-card';
 import { standorte, getStandort, rundfluege } from '@/data/flights';
 import { business } from '@/data/business';
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/schema';
 
 export function generateStaticParams() {
   return standorte.map((s) => ({ slug: s.id }));
@@ -39,6 +40,16 @@ export default async function StandortDetail({ params }: { params: Promise<{ slu
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLdScript(
+          breadcrumbJsonLd([
+            { name: 'Start', path: '/' },
+            { name: 'Standorte', path: '/standorte/' },
+            { name: s.name, path: `/standorte/${s.id}/` },
+          ]),
+        )}
+      />
       <PageHeader title={`Rundflüge ab ${s.name}`} lead={`${s.airport} (${s.icao}). ${s.beschreibung}`} />
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <h2 className="mb-8 font-heading text-2xl font-bold">Rundflüge ab {s.name}</h2>
