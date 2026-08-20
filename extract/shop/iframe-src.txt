@@ -1,0 +1,27 @@
+# Shop-Einbindung: KEINE literalen <iframe>-Elemente gefunden.
+# Der Regiondo-Shop ist als JavaScript-Booking-Widget eingebunden
+# (cdn.regiondo.net/js/integration/regiondo-booking.js), das die folgenden
+# Widget-URLs (data-url) laedt. Aufgelistet pro Shop-Seite:
+
+## rundflug-shop.html
+   base: https://allgaeu-wings.regiondo.de/
+
+## rundflug-shop_bodensee-rundflug.html
+   base: https://allgaeu-wings.regiondo.de/
+   widget: https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21506
+
+## rundflug-shop_dolomiti-gardasee-rundflug.html
+   base: https://allgaeu-wings.regiondo.de/
+   widget: https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21505
+
+## rundflug-shop_matterhorn-rundflug.html
+   base: https://allgaeu-wings.regiondo.de/
+   widget: https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21508
+
+## rundflug-shop_mont-blanc-rundflug.html
+   base: https://allgaeu-wings.regiondo.de/
+   widget: https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21489
+
+## rundflug-shop_zugspitze-rundflug.html
+   base: https://allgaeu-wings.regiondo.de/
+   widget: https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21507

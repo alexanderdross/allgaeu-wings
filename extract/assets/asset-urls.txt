@@ -1,0 +1,25 @@
+# <img src>/<data-src> und og:image URLs von Startseite + Shop-Seiten
+
+https://www.allgaeu-wings.de/wp-content/uploads/2015/12/Logo.png
+https://www.allgaeu-wings.de/wp-content/uploads/2015/07/Rundflug_Icon.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/07/Koffer_Icon.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/07/Yoke_Icon.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/07/Pilot_Icon.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/07/Tower_Icon.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/07/Schulungs_Icon.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2023/12/allgaeu-wings_1200x675_weiss.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/schlossNeuSHigh.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/zugspitzeMedium.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/OrtlerHigh.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/Plattkofel.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/GardaseeHigh.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/OrtlerMedium.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/Reschenpass.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/matterhornRundflug.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/alpenBodensee.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/dentsBlanchesHigh.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/lindauHigh.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/see.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/avoriazHigh.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/07/MontBlanc.jpg
+https://www.allgaeu-wings.de/wp-content/uploads/2015/11/saentis2High.jpg
