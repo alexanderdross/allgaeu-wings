@@ -40,9 +40,28 @@ export default function ImpressumPage() {
               Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: {business.vatId}
             </p>
           </div>
+          <div>
+            <h2 className="font-heading text-lg font-semibold">Verantwortlich für den Inhalt (§ 18 Abs. 2 MStV)</h2>
+            <p className="mt-2 text-muted-foreground">
+              {business.managingDirectors.join(', ')}, Anschrift wie oben.
+            </p>
+          </div>
+          <div>
+            <h2 className="font-heading text-lg font-semibold">EU-Streitschlichtung</h2>
+            <p className="mt-2 text-muted-foreground">
+              Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS)
+              bereit:{' '}
+              <a href="https://ec.europa.eu/consumers/odr/" className="text-accent underline" target="_blank" rel="noopener noreferrer">
+                https://ec.europa.eu/consumers/odr/
+              </a>
+              . Wir sind nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor
+              einer Verbraucherschlichtungsstelle teilzunehmen.
+            </p>
+          </div>
           <p className="rounded-lg border border-border bg-secondary/40 p-4 text-xs text-muted-foreground">
-            Hinweis: Inhalte übernommen aus dem bestehenden Impressum (extract/html/impressum.html).
-            Vor Go-live rechtlich zu prüfen (siehe docs/08-recht-compliance.md).
+            Hinweis: Angaben teils übernommen aus dem bestehenden Impressum
+            (extract/html/impressum.html). Vor Go-live rechtlich zu prüfen (siehe
+            docs/08-recht-compliance.md).
           </p>
         </div>
       </section>
