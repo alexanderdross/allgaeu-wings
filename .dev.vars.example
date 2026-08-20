@@ -1,0 +1,23 @@
+# Lokale Secrets für `pnpm preview` (wrangler). Kopiere nach .dev.vars.
+# In Produktion werden diese im Cloudflare-Dashboard gesetzt (keep_vars: true).
+
+# Stripe (Phase 3)
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+STRIPE_AUTOMATIC_TAX=false
+
+# E-Mail (worker-mailer / SMTP)
+SMTP_HOST=
+SMTP_PORT=587
+SMTP_USER=
+SMTP_PASS=
+SHOP_EMAIL_TO=
+
+# Turnstile (Formular-Spam-Schutz)
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=
+TURNSTILE_SECRET_KEY=
+
+# Site
+SITE_URL=https://www.allgaeu-wings.de
+NEXT_PUBLIC_CF_IMAGE_TRANSFORMATIONS=false
