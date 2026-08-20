@@ -12,6 +12,7 @@ import {
   flugzeug,
 } from '@/data/flights';
 import { breadcrumbJsonLd, jsonLdScript } from '@/lib/schema';
+import { CheckoutButton } from '@/components/checkout-button';
 
 export function generateStaticParams() {
   return rundfluege.map((flug) => ({ slug: flug.slug }));
@@ -114,11 +115,13 @@ export default async function RundflugDetail({ params }: { params: Promise<{ slu
             <p className="text-sm text-muted-foreground">Preis ganze Buchung</p>
             <p className="font-heading text-4xl font-bold text-primary">{formatPreis(flug.preis)}</p>
             <p className="mt-1 text-sm text-muted-foreground">{formatDauer(flug.flugzeitMin)} Flugzeit</p>
-            <Button asChild variant="accent" className="mt-6 w-full" size="lg">
-              {/* Phase 3: nativer Stripe-Checkout. Bis dahin Anfrage/Gutschein. */}
-              <Link href="/kontakt/anfrage/">Jetzt anfragen</Link>
-            </Button>
+            <div className="mt-6">
+              <CheckoutButton slug={flug.slug} />
+            </div>
             <Button asChild variant="outline" className="mt-3 w-full">
+              <Link href="/kontakt/anfrage/">Lieber anfragen</Link>
+            </Button>
+            <Button asChild variant="ghost" className="mt-2 w-full">
               <Link href="/gutscheine/">Als Gutschein verschenken</Link>
             </Button>
             <p className="mt-4 text-xs text-muted-foreground">
