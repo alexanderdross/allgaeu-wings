@@ -1,0 +1,7 @@
+200  regiondo.de/shop/allgaeu-wings.html -> regiondo-shop.html (44778b)
+200  allgaeu-wings.regiondo.de/ -> regiondo-vendor-shop.html (92840b)
+200  https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21508 -> widget_matterhorn_21508.html (47062b)
+200  https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21507 -> widget_zugspitze_21507.html (47052b)
+200  https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21506 -> widget_bodensee_21506.html (47052b)
+200  https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21505 -> widget_dolomiti-gardasee_21505.html (47037b)
+200  https://allgaeu-wings.regiondo.de/bookingwidget/vendor/11122/id/21489 -> widget_mont-blanc_21489.html (47067b)
