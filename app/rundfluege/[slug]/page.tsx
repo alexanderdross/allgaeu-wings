@@ -11,6 +11,7 @@ import {
   formatDauer,
   flugzeug,
 } from '@/data/flights';
+import { breadcrumbJsonLd, jsonLdScript } from '@/lib/schema';
 
 export function generateStaticParams() {
   return rundfluege.map((flug) => ({ slug: flug.slug }));
@@ -53,6 +54,16 @@ export default async function RundflugDetail({ params }: { params: Promise<{ slu
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLdScript(
+          breadcrumbJsonLd([
+            { name: 'Start', path: '/' },
+            { name: 'Rundflüge', path: '/rundfluege/' },
+            { name: flug.name, path: `/rundfluege/${flug.slug}/` },
+          ]),
+        )}
+      />
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary to-[#0d2a4a] text-white">
