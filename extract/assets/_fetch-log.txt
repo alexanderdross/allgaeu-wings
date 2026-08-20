@@ -1,0 +1,7 @@
+200  https://www.allgaeu-wings.de/wp-content/uploads/2015/12/Logo.png  ->  Logo.png (44948b)
+200  https://www.allgaeu-wings.de/wp-content/favicon/favicon-32x32.png  ->  favicon-32x32.png (1796b)
+200  https://www.allgaeu-wings.de/wp-content/favicon/favicon-96x96.png  ->  favicon-96x96.png (6663b)
+200  https://www.allgaeu-wings.de/wp-content/favicon/apple-icon-180x180.png  ->  apple-icon-180x180.png (16757b)
+200  https://www.allgaeu-wings.de/wp-content/favicon/android-icon-192x192.png  ->  android-icon-192x192.png (17124b)
+302  https://www.allgaeu-wings.de/favicon.ico  ->  favicon.ico (0b)
+200  https://www.allgaeu-wings.de/wp-content/uploads/2023/12/allgaeu-wings_1200x675_weiss.jpg  ->  allgaeu-wings_1200x675_weiss.jpg (78587b)
