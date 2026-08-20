@@ -44,3 +44,32 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: '1'
           SITE_URL: https://www.allgaeu-wings.de
+
+  # Sichert den echten Deploy-Pfad ab (OpenNext → .open-next/worker.js), den
+  # Cloudflare Workers Builds beim Deploy ausführt. Kein Deploy, nur Build —
+  # braucht keine Secrets. Fängt Workers-Runtime-Fehler (z. B. cloudflare:sockets)
+  # ab, die `pnpm build` unter Node nicht bemerkt.
+  build-cf:
+    name: OpenNext Cloudflare Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: OpenNext Cloudflare build
+        run: pnpm build:cf
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+          SITE_URL: https://www.allgaeu-wings.de

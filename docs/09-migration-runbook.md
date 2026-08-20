@@ -42,13 +42,31 @@ wrangler d1 create allgaeu-wings                        # DB-Binding
 IDs in `wrangler.jsonc` eintragen. D1-Schema (`vouchers`, `redemptions`, `booking_requests`,
 `webhook_events`) via Drizzle-Migration anwenden.
 
+## Phase 1b · Cloudflare-Ressourcen — aktuell KEINE nötig
+
+Da die Seite statisch ist und `wrangler.jsonc` auf **`ASSETS`** abgeschlankt ist, braucht das
+erste Deploy **keinen** R2-/KV-/D1-Namespace. Statische Bilder laufen über `ASSETS`. R2/KV/D1
+werden erst mit ihren Phasen aus den kommentierten Blöcken in `wrangler.jsonc` reaktiviert
+(`01-architektur.md`).
+
 ## Phase 2 · Workers Builds verbinden
 
-1. Repo `alexanderdross/allgaeu-wings` in Cloudflare → Workers & Pages → **Workers Builds** verbinden.
-2. Build-Command `pnpm build:cf`, Deploy-Command `wrangler deploy` (bzw. via `build:cf`-Skript).
-3. **Vars & Secrets im Dashboard** setzen (nicht in `wrangler.jsonc`) – siehe `01-architektur.md`.
-   `keep_vars: true` schützt sie vor Überschreiben.
-4. Erster Deploy auf `*.workers.dev` – **kein** Custom-Domain-Traffic.
+1. Cloudflare-Dashboard → **Workers & Pages → Create → Workers → Connect to Git** → Repo
+   `alexanderdross/allgaeu-wings`, Branch `main`.
+2. Einstellungen:
+   - **Build command:** `pnpm build:cf`
+   - **Deploy command:** `npx wrangler deploy` (oder leer lassen — Workers Builds deployt den
+     durch `build:cf` erzeugten Worker automatisch)
+   - **Root directory:** `/`
+3. **Wichtig — Build-Scripts:** `package.json` enthält
+   `pnpm.onlyBuiltDependencies: ["workerd", "esbuild", "unrs-resolver"]`, damit der Runner
+   `workerd` baut (sonst schlägt `opennextjs-cloudflare build` fehl). Dieser Deploy-Pfad wird im
+   GitHub-CI-Job **„OpenNext Cloudflare Build"** vor jedem Merge geprüft.
+4. **Vars & Secrets im Dashboard** setzen (nicht in `wrangler.jsonc`): `SITE_URL`, später
+   `STRIPE_*`, `SMTP_*`, `TURNSTILE_*`. `keep_vars: true` schützt sie vor Überschreiben.
+5. Erster Deploy landet auf `https://allgaeu-wings.<subdomain>.workers.dev` – **kein**
+   Custom-Domain-Traffic. Lokal ist der Build mit `pnpm build:cf` bereits verifiziert
+   (`.open-next/worker.js` wird erzeugt).
 
 ## Phase 3 · Smoke-Test ohne Traffic
 
