@@ -34,8 +34,35 @@ export interface Variante { id, label, dauerMin, preis }  // preis brutto, serve
 **Preise werden serverseitig aufgelöst** – der Client schickt nur `slug`/`variantId`, **nie einen
 Betrag** (Manipulationsschutz, Muster `drossnet` `checkout/route.ts`).
 
-> **TODO (aus Extract):** `basisPreis`, `flugzeitMin`, Varianten und Personenzahl je Ziel aus
-> `extract/shop/produkte.md` übernehmen. Bis dahin Platzhalter. **Nichts schätzen.**
+### 2.1 Produktkatalog (belegt aus `extract/shop/produkte.md`)
+
+Preise und Dauern aus dem **Regiondo-Shop** (Vendor-ID **11122**), Stand 20.08.2026 –
+Preis = ganze Buchung:
+
+| Ziel | Dauer | Preis | Regiondo-ID | neue URL |
+|---|---|---|---|---|
+| Bodensee | ca. 60 min | **249,00 €** | 21506 | `/rundfluege/bodensee/` |
+| Zugspitze | ca. 60 min | **249,00 €** | 21507 | `/rundfluege/zugspitze/` |
+| Ötztal | ca. 80 min | **329,00 €** | 163942 | `/rundfluege/oetztal/` ⚠️ neu |
+| Großglockner | ca. 100 min | **399,00 €** | 21540 | `/rundfluege/grossglockner/` ⚠️ neu |
+| Matterhorn | ca. 140 min | **489,00 €** | 21508 | `/rundfluege/matterhorn/` |
+| Mont Blanc | ca. 150 min | **489,00 €** | 21489 | `/rundfluege/mont-blanc/` |
+| Dolomiten & Gardasee | ca. 150 min | **489,00 €** | 21505 | `/rundfluege/dolomiten-gardasee/` |
+
+**⚠️ Zwei bisher unbekannte Ziele:** **Ötztal** (80 min) und **Großglockner** (100 min) tauchen
+in der GSC nicht auf (keine eigenen Landingpages), existieren aber als Regiondo-Produkte. Sie
+gehören in die Informationsarchitektur (`03-informationsarchitektur.md`) und ins Datenmodell.
+
+**⚠️ Preis-Diskrepanz:** Die WordPress-Seite `/rundfluege/` nennt für Mont Blanc und
+Dolomiten-Gardasee **„444 € p. Person"** (150 min, ab Memmingen), der Regiondo-Shop **489,00 €**
+(ganze Buchung). Beide Werte sind unverändert aus dem Extract übernommen. **Vor Launch mit dem
+Betrieb klären**, welcher Preis (und ob pro Person oder pro Buchung) gilt – nicht selbst vereinheitlichen.
+
+- **Abflug:** „ab Memmingen oder Friedrichshafen" (belegt auf `/rundflug-shop/`).
+- **Buchungstelefon:** +49 8387 3924328 (auf `/rundfluege/`) — abweichend von der Firmen-Zentrale
+  08387 391-0 (Impressum).
+- **Personenzahl je Flug** wird im Produkt-Grid nicht genannt → aus dem Betrieb ergänzen
+  (Cessna P210N: bis zu ~3 Passagiere, aus GSC/`drossnet`-Kontext, **zu bestätigen**).
 
 ## 3. Checkout-Flow
 

@@ -46,22 +46,53 @@ inhaltlich nächste neue URL**; verwaiste WordPress-URLs (Attachments) werden en
 `middleware.ts` erzwungen (behebt zugleich das abgelaufene TLS-Zertifikat der Alt-Seite).
 Canonical-Wahl (`www` vs. Apex) in Phase 1 festlegen und konsistent halten.
 
-## 2. Nicht rankende Alt-URLs — aus dem Extract ergänzen
+## 2. Vollständige Alt-URL-Liste (aus `extract/sitemaps/all-urls.txt` = 73 URLs)
 
-`data/gsc/` enthält nur die **rankenden** URLs. Die **vollständige** Alt-URL-Liste steht in
-`extract/sitemaps/all-urls.txt` (Fetcher-Session). Beim Implementieren gilt:
+Die Sitemap (Yoast) enthält **29 Seiten** (`page-sitemap.xml`) + **44 Attachments**
+(`attachment-sitemap.xml`); `post-sitemap.xml` ist leer (kein Blog). Behandlung:
 
-- [ ] `all-urls.txt` gegen die Tabelle oben abgleichen; jede zusätzliche Seiten-URL bekommt ein
-      Redirect-Ziel (nächste passende neue Seite) oder – wenn ersatzlos – 301 auf den nächsten Hub.
-- [ ] **Attachment-URLs** (`page-sitemap` vs. `attachment-sitemap`): pauschal **410 Gone** oder
-      301 auf das zugehörige Elternobjekt. Nicht in die neue Sitemap aufnehmen.
-- [ ] Etwaige `/rundflug-shop/*`-Unterseiten ohne Entsprechung → `/rundfluege/` (Hub).
-- [ ] Etwaige `/rundfluege/wunschrundfluege/*`-Unterseiten → passendes `/rundfluege/[ziel]/` oder
-      `/rundfluege/wunschrundflug/`.
+### 2.1 Zusätzliche Seiten-URLs (nicht in Abschnitt 1, aber in der Page-Sitemap)
 
-> Dieser Abschnitt ist bewusst als **Checkliste** angelegt: die rankenden URLs (Abschnitt 1) sind
-> die geschäftskritischen 301s und vollständig belegt; der Long-Tail wird mechanisch aus dem
-> Extract vervollständigt, nicht geraten.
+| Alt-URL | Neu-URL | Typ | Hinweis |
+|---|---|---|---|
+| `/rundflug-shop/matterhorn-rundflug/` | `/rundfluege/matterhorn/` | 301 | 140 min / 489 € |
+| `/rundflug-shop/mont-blanc-rundflug/` | `/rundfluege/mont-blanc/` | 301 | 150 min / 489 € |
+| `/rundflug-shop/bodensee-rundflug/` | `/rundfluege/bodensee/` | 301 | 60 min / 249 € |
+| `/rundfluege/rundflug-buchen/` | `/kontakt/anfrage/` | 301 | Anfrageformular |
+| `/rundfluege/rundflugbox/` | `/gutscheine/` | 301 | „Rundflugbox" = Gutschein |
+| `/cessna-p210n/` (EN) | `/flugzeug/cessna-p210n/` | 301 | engl. Variante von `-2/` |
+| `/267-2/` (EN „Scenic Flight") | `/rundfluege/` | 301 | verwaiste EN-Seite |
+| `/267-2/book-a-scenic-flight/` (EN) | `/kontakt/anfrage/` | 301 | EN-Anfrageseite |
+| `/imprint/` (EN) | `/rechtliches/impressum/` | 301 | engl. Impressum |
+
+> **Hinweis EN-Seiten:** `/imprint/`, `/267-2/`, `/267-2/book-a-scenic-flight/`, `/cessna-p210n/`
+> sind englische Seiten (`<html lang>` global „de", Sprache nur am Inhalt erkennbar). Da kein
+> EN-Launch geplant ist (`05-gsc-analyse.md` §4), werden sie auf die passende **deutsche** Seite
+> weitergeleitet. Falls später `/en/` gebaut wird, können sie dorthin zeigen.
+
+### 2.2 Attachment-URLs (44) → 410 Gone
+
+Alle WordPress-Attachment-/Medienseiten unter folgenden Pfaden werden **pauschal 410 Gone**
+(nicht in die neue Sitemap, kein Crawl-Budget) – sie haben nie gerankt (0 Klicks/Impr.):
+
+```
+/allgau-wings/<bild>/                    (12×  z. B. _38a2619, matterhornhigh, main, image001-2)
+/cessna-p210n-2/<bild>/                  ( 7×  fullsizerender, ifr, ifrblue, ifrcockpit, mein-film …)
+/news-und-aktionen/<bild-oder-attachment>/  (12×  front1, jury, hospiz, *logo, attachment/012 …)
+/rundfluege/<img_xxxx>/                   ( 7×  img_0628, img_1032, img_20150802_… )
+/rundflug-shop/mont-blanc-rundflug/<bild>/   ( 2×  montblancroute, olympus-digital-camera-3 )
+/rundfluege/wunschrundfluege/oesterreich_rundflug/austria/   (1×)
+/rundfluege/rundflug-buchen/rundflug/     (1×)
+/rundfluege/rundflugbox/rundfluggeschenk/ (1×)
+/wer-wir-sind/{heiko,olympus-digital-camera-4}/  (2×)
+```
+
+Umsetzung als **Catch-all** in `middleware.ts` (Muster `drossnet/middleware.ts`): jede URL, die
+auf ein bekanntes Attachment-Muster passt und keine kuratierte Seite ist → 410. Die vollständige
+Liste steht in `extract/sitemaps/all-urls.txt` und `extract/sitemaps/attachment-sitemap.xml`.
+
+> **Ergebnis:** Alle 73 Alt-URLs sind abgedeckt — 29 Seiten via Abschnitt 1 + 2.1 (301 auf
+> kuratierte Ziele), 44 Attachments via 2.2 (410 Gone). Nichts bleibt offen, nichts geraten.
 
 ## 3. Implementierungshinweis
 

@@ -10,12 +10,14 @@ Index-Quote von 29 % → > 90 %.
 /                                          Startseite
 │
 ├── /rundfluege/                           Hub: alle Rundflüge (Übersicht + Filter)
-│   ├── /rundfluege/zugspitze/             Ziel = Produkt   ← 70 Klicks Shop-Seite heute
-│   ├── /rundfluege/alpen/                 Ziel = Produkt   ← 3.170 Impr. ungenutzt
-│   ├── /rundfluege/bodensee/              Ziel = Produkt   ← 487 Impr.
-│   ├── /rundfluege/dolomiten-gardasee/    Ziel = Produkt   ← 437 Impr.
-│   ├── /rundfluege/matterhorn/            Ziel = Produkt
-│   ├── /rundfluege/mont-blanc/            Ziel = Produkt
+│   ├── /rundfluege/zugspitze/             Ziel = Produkt   ← 70 Klicks; 60 min / 249 €
+│   ├── /rundfluege/alpen/                 Ziel = Produkt   ← 3.170 Impr. ungenutzt (Hub-Ziel)
+│   ├── /rundfluege/bodensee/              Ziel = Produkt   ← 487 Impr.; 60 min / 249 €
+│   ├── /rundfluege/dolomiten-gardasee/    Ziel = Produkt   ← 437 Impr.; 150 min / 489 €
+│   ├── /rundfluege/oetztal/               Ziel = Produkt   ← ⚠️ neu (Regiondo); 80 min / 329 €
+│   ├── /rundfluege/grossglockner/         Ziel = Produkt   ← ⚠️ neu (Regiondo); 100 min / 399 €
+│   ├── /rundfluege/matterhorn/            Ziel = Produkt   ← 140 min / 489 €
+│   ├── /rundfluege/mont-blanc/            Ziel = Produkt   ← 150 min / 489 €
 │   ├── /rundfluege/oesterreich/           Ziel = Produkt   ← Pos. 27, 403 Impr.
 │   ├── /rundfluege/schweiz/               Ziel = Produkt
 │   └── /rundfluege/wunschrundflug/        konfigurierbar / Anfrage
@@ -53,9 +55,10 @@ Index-Quote von 29 % → > 90 %.
     └── /rechtliches/widerruf/
 ```
 
-> Die exakten Ziel-Slugs und die vollständige Routenliste werden nach Vorliegen der
-> Live-Extraktion (`extract/sitemaps/all-urls.txt`, `extract/shop/produkte.md`) gegen den
-> Ist-Zustand abgeglichen. Basis der Redirects: `06-redirect-map.md`.
+> **Abgeglichen mit dem Extract** (`extract/sitemaps/all-urls.txt` = 73 URLs, `extract/shop/produkte.md`):
+> Die 7 Regiondo-Produkte sind vollständig abgebildet; **Ötztal** und **Großglockner** waren in der
+> GSC nicht sichtbar und wurden ergänzt. Preise/Dauern siehe `07-shop-stripe.md` §2.1.
+> Basis der Redirects: `06-redirect-map.md`.
 
 ## Navigation
 
@@ -112,8 +115,9 @@ export interface Rundflug {                    // = Ziel = Produkt
 }
 ```
 
-Preise und exakte Flugzeiten werden aus `extract/shop/produkte.md` übernommen – **nicht geschätzt**.
-Bis dahin `TODO`-Platzhalter.
+Preise und Flugzeiten der 7 Ziele sind aus `extract/shop/produkte.md` belegt (`07-shop-stripe.md`
+§2.1) – **nicht geschätzt**. Offen bleibt die Personenzahl je Flug (im Produkt-Grid nicht genannt,
+aus dem Betrieb zu bestätigen) und die Preis-Diskrepanz Regiondo (489 €) vs. WP-Seite („444 € p. P.").
 
 ## Was NICHT migriert wird
 

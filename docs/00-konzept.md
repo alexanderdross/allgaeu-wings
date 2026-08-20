@@ -7,10 +7,14 @@ Thomas Daubner; USt-IdNr. DE299519907) betreibt Alpen-Rundflüge mit einer Cessn
 Memmingen und Friedrichshafen, einen A320-Flugsimulator (Haar bei München), Flugangstseminare
 sowie Charter und IFR-Training.
 
-Die aktuelle Website `www.allgaeu-wings.de` läuft auf **WordPress** und ist in die Jahre gekommen:
+Die aktuelle Website `www.allgaeu-wings.de` läuft auf **WordPress 6.8.8 mit dem Divi-Theme
+4.19.3** (Page-Builder, Yoast SEO, Contact Form 7, Complianz-Cookie-Consent, WP Google Maps) und
+ist in die Jahre gekommen:
 
-- Der Online-Shop ist ein **Regiondo-iframe** – fremde Domain, fremdes Checkout, fremde
-  Kundendaten, kein SEO-Wert, schlechte Ladezeit.
+- Der Online-Shop ist ein **eingebettetes Regiondo-Buchungs-Widget** (JavaScript-Widget von
+  `cdn.regiondo.net`, Vendor-ID 11122, lädt `allgaeu-wings.regiondo.de/bookingwidget/...`; der
+  Kauf springt faktisch auf Regiondo) – fremde Domain, fremdes Checkout, fremde Kundendaten,
+  kein SEO-Wert, schlechte Ladezeit.
 - Nur **~29 % der URLs sind bei Google indexiert** (30 von ~102, siehe `05-gsc-analyse.md`).
 - Für nachfragestarke Ziel-Begriffe („alpenrundflug", „rundflug bodensee", „rundflug gardasee")
   existieren **keine eigenen Landingpages** – die Startseite rankt breit und schwach.

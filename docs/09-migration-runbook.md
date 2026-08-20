@@ -4,10 +4,19 @@ Cutover von WordPress zu Next.js auf Cloudflare Workers. Struktur nach Vorbild
 `drossnet/src/docs/memory/architecture/cutover-checklist.md`. **Das alte WordPress läuft bis zur
 Freigabe parallel** – Rollback = DNS zurück.
 
-## Phase 0 · Rohextraktion (erledigt durch Fetcher-Session)
+## Phase 0 · Rohextraktion ✅ (erledigt durch Fetcher-Session)
 
-Eine separate Session mit vollem Netzzugriff hat die Live-Seite extrahiert und auf den Branch
-`claude/site-extract-raw` gepusht. Inhalt siehe `extract/`:
+Eine separate Session mit vollem Netzzugriff hat die Live-Seite extrahiert und nach `extract/`
+committet (79 Dateien, ~13 MB). Kernzahlen aus `extract/EXTRACT-REPORT.md`:
+
+- **73 Alt-URLs** gesamt (29 Seiten + 44 Attachments; kein Blog).
+- **WordPress 6.8.8 / Divi 4.19.3**, Yoast, Contact Form 7, Complianz, WP Google Maps, OMGF (Open Sans).
+- **Regiondo-Widget**, Vendor-ID **11122**, 7 Produkte (249–489 €).
+- **Ungültiges TLS-Zertifikat** der Alt-Seite bestätigt (nur mit `-k`/`--ignore-certificate-errors`
+  erreichbar; Gegenprobe `example.com` = gültig → Eigenschaft der Zielsite).
+- Alle 10 Screenshots, CI-Farben (`#173f68` Navy, `#2ea3f2` Akzent, Rot), Logo + Favicons gesichert.
+
+Inhalt siehe `extract/`:
 
 | Ordner | Inhalt |
 |---|---|

@@ -7,60 +7,82 @@ Farbwerte sind Allgäu-Wings-spezifisch.
 
 ## 1. Farb-Tokens
 
-Zwei Ebenen: eine **Brand-Ebene** (die CI-Farben der Allgäu Wings) und eine **semantische Ebene**
-(die shadcn/ui-Tokens), die auf die Brand-Ebene gemappt wird. So ist die CI an **einer** Stelle
-gepflegt.
+**Quelle:** Rekonstruiert aus `extract/css/` (Divi-Dynamic-CSS + Inline-Styles), dem Logo
+(`extract/assets/Logo.png`) und den Screenshots (`extract/screenshots/`).
+
+**Belegte CI-Farben:**
+
+| Rolle | Hex | Beleg |
+|---|---|---|
+| **Marineblau (Primär)** | `#173f68` | Header, Footer, CTA-Sektionen; als `background-color:#173f68` und Overlay `rgba(23,63,104,0.65)` in Inline-Styles |
+| **Marineblau dunkel (Variante)** | `#1b3668` | Überschriften-Blau in Inline-Styles |
+| **Akzentblau (Links/Buttons)** | `#2ea3f2` | Links („Shop.", Social), Button-/Border-Akzent (`color:#2ea3f2`, 19 Treffer; Divi-Akzent, faktisch die interaktive Farbe der Seite) |
+| **Signalrot (Sekundär-Akzent)** | ~`#d32422` | Logo-Rand, rote Diagonal-Banner der Produktkarten, rote Aufmerksamkeits-Headline („Unser neues Rundflug Erklärvideo!") — **visuell aus Logo + Screenshots abgeleitet, exakter Hex am Logo-Original zu bestätigen** |
+| **Footer-Leiste (fast schwarz)** | ~`#1e1f26` | Rechtstext-Leiste unter dem Footer |
+| Text | `#333` | Fließtext |
+| Muted | `#666` / `#777` | Sekundärtext |
+| Border | `#eee` / `#ddd` | Trennlinien |
+| Weiß | `#fff` | Flächen (107 Treffer, dominant) |
+
+> Nicht als Markenfarben verwendet: die vielen 2er-Treffer in `colors.txt` (`#5865f2`, `#25d366`,
+> `#1da1f2`, `#3b5998` …) sind **Social-Share-Button-Farben** aus einem Plugin — bewusst ignoriert.
 
 ```css
-/* app/globals.css */
+/* app/globals.css — CI Allgäu Wings, HSL-Umrechnung der belegten Hex-Werte */
 @layer base {
   :root {
-    /* ── Brand (CI Allgäu Wings) ─────────────────────────────
-       TODO: echte Werte aus extract/css/colors.txt eintragen.
-       Der häufigste Marken-Blauton wird --aw-primary, die
-       Textfarbe --aw-ink, die helle Fläche --aw-surface. */
-    --aw-primary:  /* TODO hsl(...)  Marken-Primärfarbe */;
-    --aw-ink:      /* TODO hsl(...)  Textfarbe dunkel   */;
-    --aw-surface:  /* TODO hsl(...)  helle Akzentfläche */;
-    --aw-accent:   /* TODO hsl(...)  optionaler Akzent  */;
+    /* ── Brand (CI Allgäu Wings) ───────────────────────────── */
+    --aw-navy:    211 64% 25%;   /* #173f68  Primär: Header/Footer/CTA */
+    --aw-navy-deep: 219 61% 20%; /* #011835/#1b3668  dunkle Variante   */
+    --aw-blue:    204 88% 56%;   /* #2ea3f2  Akzent: Links/Buttons      */
+    --aw-red:       1 72% 48%;   /* ~#d32422 Signalrot: Banner/Logo-Rand (Hex bestätigen) */
+    --aw-ink:     220 15% 20%;   /* #333     Textfarbe                  */
+    --aw-footer:  228 13% 13%;   /* ~#1e1f26 Footer-Leiste              */
 
     /* ── Semantik (shadcn/ui) → auf Brand gemappt ──────────── */
-    --background:            210 20% 98%;   /* TODO ggf. an CI */
+    --background:            0 0% 100%;        /* Seite ist überwiegend weiß */
     --foreground:            var(--aw-ink);
     --card:                  0 0% 100%;
     --card-foreground:       var(--aw-ink);
-    --primary:               var(--aw-primary);
+    --primary:               var(--aw-navy);   /* Marineblau trägt die Marke */
     --primary-foreground:    0 0% 100%;
-    --secondary:             210 16% 93%;   /* TODO */
+    --secondary:             211 30% 95%;      /* helles Blaugrau als Sektionsfläche */
     --secondary-foreground:  var(--aw-ink);
-    --muted:                 210 16% 90%;   /* TODO */
-    --muted-foreground:      215 12% 40%;
-    --accent:                var(--aw-primary);
+    --muted:                 210 16% 90%;
+    --muted-foreground:      220 8% 40%;       /* #666/#777 */
+    --accent:                var(--aw-blue);   /* interaktives Blau */
     --accent-foreground:     0 0% 100%;
-    --destructive:           0 72% 45%;
-    --border:                210 16% 86%;   /* TODO */
-    --input:                 210 16% 86%;
-    --ring:                  var(--aw-primary);
+    --destructive:           var(--aw-red);
+    --border:                210 16% 90%;      /* #eee/#ddd */
+    --input:                 210 16% 88%;
+    --ring:                  var(--aw-blue);
     --radius:                0.5rem;
   }
 }
 ```
 
-> **Wichtig:** Kein Farbwert oben ist final – die `TODO`-Werte sind Platzhalter im
-> drossnet-Blauschema. Die echten Werte stammen aus **`extract/css/colors.txt`** (Farben der
-> Live-Seite, nach Häufigkeit sortiert) und dem Logo (`extract/assets/`). Erst nach Vorliegen des
-> Extracts werden sie hier und in `globals.css` gesetzt. **Nichts geraten als final ausgeben.**
+> **Refresh-Hinweis:** Rot war auf der Alt-Seite laut und flächig (Diagonal-Banner). Im Refresh
+> **sparsamer** einsetzen — als Akzent (Badges „Beliebt", Sonderaktion), nicht als Dauerfläche.
+> Marineblau bleibt die tragende Markenfarbe, Akzentblau die interaktive. Der exakte Rot-Hex ist
+> am Logo-Original zu final­isieren (das gerenderte `Logo.png` liegt in `extract/assets/`).
 
 ## 2. Typografie
 
-Nach drossnet-Vorbild, **selbstgehostet via `next/font/local`** (DSGVO – keine Google-Fonts-CDN):
+**Ist-Zustand (Extract):** Die Alt-Seite nutzt **Open Sans** (Divi-Standard), selbstgehostet über
+das Plugin OMGF (`wp-content/uploads/omgf/et-divi-open-sans/`) – DSGVO-konform ohne Google-CDN. Es
+gibt **keine spezielle Hausschrift** in der CI.
 
-- **Headings:** eine geometrische/humanistische Sans (z. B. Outfit) – `--font-heading`
-- **Body:** eine gut lesbare Sans (z. B. Inter) – `--font-body`
-- `font-display: swap`, Gewichte 400–700
+**Neubau,** selbstgehostet via `next/font/local` (DSGVO – keine Google-Fonts-CDN):
 
-> **TODO:** falls die CI eine bestimmte Hausschrift vorgibt (aus `extract/` / Styleguide), diese
-> selbstgehostet einbinden statt der Defaults.
+- **Headings:** eine geometrische/humanistische Sans (z. B. Outfit) – `--font-heading`.
+  Passt zum technischen, klaren Charakter der Marke und hebt den Refresh sichtbar von der
+  Divi-Standardanmutung ab.
+- **Body:** eine gut lesbare Sans (z. B. Inter) – `--font-body`. Alternativ Open Sans beibehalten,
+  wenn Kontinuität zur Alt-Seite gewünscht ist.
+- `font-display: swap`, Gewichte 400–700.
+
+Da keine Marken-Hausschrift existiert, ist die Schriftwahl ein **echter Design-Freiheitsgrad** –
+Open Sans muss nicht übernommen werden.
 
 ## 3. Layout-Grundraster
 
@@ -106,9 +128,39 @@ Auf Cloudflare Workers greift **kein automatischer Bildoptimierer** (`01-archite
 | Screenshots | `extract/screenshots/` | Referenz für Alt-Layout (Design-Vergleich) |
 | Farben | `extract/css/colors.txt` | CI-Rekonstruktion (§1) |
 
-## 7. Offene Design-Punkte (nach Extract zu füllen)
+## 7. Logo & Marke (aus `extract/assets/Logo.png`)
 
-- [ ] `--aw-primary/-ink/-surface/-accent` mit echten Hex/HSL aus `colors.txt` setzen
-- [ ] Semantische Tokens (`background`, `secondary`, `muted`, `border`) an CI feinjustieren
-- [ ] Hausschrift prüfen und ggf. selbstgehostet einbinden
-- [ ] Logo in SVG/optimiertem Format bereitstellen (aus `extract/assets/`)
+Das Logo ist ein **geflügeltes Wappen/Emblem**: marineblaues Schild mit **rotem Rand**,
+weißer Schriftzug „ALLGÄU WINGS", stilisierte Bergsilhouette und konzentrische Radar-/Zielkreise,
+seitliche Schwingen, darunter **fünf hellblaue Sterne**. Es transportiert die CI kompakt:
+Marineblau + Rot + Weiß, mit Aviation-/Präzisions-Anmutung.
+
+- Für den Neubau: Logo als **SVG** nachbauen/vektorisieren (das Original liegt nur als PNG vor),
+  für scharfe Darstellung und Dark-Header. Favicons vorhanden (`favicon-32/96`, `apple-180`,
+  `android-192`).
+- Der rote Rand des Logos = der Bezugspunkt für den exakten Rot-Ton (`--aw-red`).
+
+## 8. Erkenntnisse aus den Screenshots (Refresh-Leitplanken)
+
+Aus `extract/screenshots/` (Desktop + Mobil):
+
+- **Header:** marineblau, weiße Textnavigation, zentriertes Logo. → im Refresh sticky + Dropdown.
+- **Hero:** vollflächiges Flugzeug-über-Alpen-Foto mit mittigem „Zum Shop"-Button. → beibehalten,
+  aber mit stärkerem Textscrim und klarer Headline + zwei CTAs.
+- **Produktkarten:** Bild mit **roter Diagonal-Ribbon** („Dauer: 140 min") und „Zur Box"-Button.
+  → Ribbon dezenter, Meta-Zeilen strukturierter (Flugzeit, Preis, Abflugort), Karte als Link.
+- **CTA-Sektionen** („Flugangstseminar", „Anfrage"): marineblaue Vollflächen mit weiß-outline
+  Buttons. → beibehalten, Rhythmus `bg-secondary/30` ↔ `bg-primary`.
+- **Footer:** marineblau + fast-schwarze Rechtstext-Leiste. → übernehmen.
+- **Schwächen der Alt-Seite** (Refresh-Ziele): sehr viel Leerraum/unruhiger vertikaler Rhythmus,
+  Divi-Standardanmutung, roter Fließtext als Headline, kleiner nativer Video-Player ohne Poster,
+  Shop nur als externer „Zur Box"-Sprung. → strafferer Grid, native Produktseiten, konsistente
+  Typo-Hierarchie.
+
+## 9. Erledigte Design-Punkte
+
+- [x] Brand-Tokens mit belegten Hex/HSL gesetzt (`#173f68`, `#2ea3f2`, Rot, Neutrale)
+- [x] Semantische Tokens an CI gemappt
+- [x] Schrift-Ist-Zustand geklärt (Open Sans, keine Hausschrift → Refresh-Freiheit)
+- [x] Logo analysiert; Favicons vorhanden
+- [ ] **Offen:** exakter Rot-Hex am Logo-Original bestätigen; Logo als SVG vektorisieren
