@@ -8,6 +8,9 @@
     "node": "22.x",
     "pnpm": ">=10"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": ["workerd", "esbuild", "unrs-resolver"]
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
