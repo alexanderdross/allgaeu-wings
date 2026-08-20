@@ -18,9 +18,9 @@ Index-Quote von 29 % → > 90 %.
 │   ├── /rundfluege/grossglockner/         Ziel = Produkt   ← ⚠️ neu (Regiondo); 100 min / 399 €
 │   ├── /rundfluege/matterhorn/            Ziel = Produkt   ← 140 min / 489 €
 │   ├── /rundfluege/mont-blanc/            Ziel = Produkt   ← 150 min / 489 €
-│   ├── /rundfluege/oesterreich/           Ziel = Produkt   ← Pos. 27, 403 Impr.
-│   ├── /rundfluege/schweiz/               Ziel = Produkt
-│   └── /rundfluege/wunschrundflug/        konfigurierbar / Anfrage
+│   ├── /rundfluege/oesterreich/           Ziel = Produkt   ← Pos. 27, 403 Impr. (noch nicht gebaut)
+│   ├── /rundfluege/schweiz/               Ziel = Produkt   (noch nicht gebaut)
+│   └── /rundfluege/wunschrundflug/        konfigurierbar / Anfrage (noch nicht gebaut)
 │
 ├── /standorte/                            Hub: Abflugorte
 │   ├── /standorte/memmingen/              LocalBusiness-Schema

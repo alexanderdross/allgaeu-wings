@@ -45,7 +45,7 @@ export default function GutscheinePage() {
                 <p className="mt-1 text-sm text-muted-foreground">{formatDauer(flug.flugzeitMin)}</p>
                 <p className="mt-4 font-heading text-2xl font-bold text-primary">{formatPreis(flug.preis)}</p>
                 <div className="mt-4">
-                  <CheckoutButton slug={flug.slug} label="Als Gutschein kaufen" />
+                  <CheckoutButton slug={flug.slug} label="Als Gutschein kaufen" gift />
                 </div>
               </CardContent>
             </Card>

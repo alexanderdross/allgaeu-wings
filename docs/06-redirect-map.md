@@ -18,17 +18,17 @@ inhaltlich nächste neue URL**; verwaiste WordPress-URLs (Attachments) werden en
 | `/cessna-p210n/` | `/flugzeug/cessna-p210n/` | 0 | 301 |
 | `/rundflug-shop/dolomiti-gardasee-rundflug/` | `/rundfluege/dolomiten-gardasee/` | 16 | 301 |
 | `/flugangstseminar/` | `/flugerlebnisse/flugangstseminar/` | 14 | 301 |
-| `/rundfluege/wunschrundfluege/oesterreich_rundflug/` | `/rundfluege/oesterreich/` | 10 | 301 |
+| `/rundfluege/wunschrundfluege/oesterreich_rundflug/` | `/rundfluege/oetztal/` | 10 | 301 |
 | `/rundflug-shop/` | `/rundfluege/` | 10 | 301 |
 | `/rundflug-shop/matterhorn-rundflug/` | `/rundfluege/matterhorn/` | 7 | 301 |
 | `/kontakt/` | `/kontakt/` | 6 | bleibt |
 | `/rundflug-shop/mont-blanc-rundflug/` | `/rundfluege/mont-blanc/` | 6 | 301 |
 | `/news-und-aktionen/` | `/news/` | 5 | 301 |
-| `/rundfluege/wunschrundfluege/rundflug_schweiz/` | `/rundfluege/schweiz/` | 4 | 301 |
+| `/rundfluege/wunschrundfluege/rundflug_schweiz/` | `/rundfluege/matterhorn/` | 4 | 301 |
 | `/rundflug-shop/bodensee-rundflug/` | `/rundfluege/bodensee/` | 3 | 301 |
 | `/allgaeu-wings/` | `/ueber-uns/` | 3 | 301 |
 | `/imprint/` | `/rechtliches/impressum/` | 3 | 301 |
-| `/rundfluege/wunschrundfluege/` | `/rundfluege/wunschrundflug/` | 1 | 301 |
+| `/rundfluege/wunschrundfluege/` | `/kontakt/anfrage/` | 1 | 301 |
 | `/impressum/` | `/rechtliches/impressum/` | 1 | 301 |
 | `/267-2/` | `/ueber-uns/` | 1 | 301 |
 | `/rundfluege/rundflug-buchen/` | `/kontakt/anfrage/` | 1 | 301 |
@@ -38,13 +38,21 @@ inhaltlich nächste neue URL**; verwaiste WordPress-URLs (Attachments) werden en
 | `/agb/` | `/rechtliches/agb/` | 0 | 301 |
 | `/cookie-richtlinie-eu/` | `/rechtliches/datenschutz/#cookies` | 0 | 301 |
 | `/downloads/agb.pdf` | `/rechtliches/agb/` | 0 | 301 |
-| `/conternt/all_Flyer_V04_041215_print.pdf` | `410 Gone` | 0 | 410 |
+| `/conternt/all_Flyer_V04_041215_print.pdf` | `404` (totes Asset) | 0 | 404 |
 | `http://www.allgaeu-wings.de/` | `https://www.allgaeu-wings.de/` | 0 | 301 (TLS) |
 | `https://allgaeu-wings.de/` | `https://www.allgaeu-wings.de/` | 0 | 301 (Canonical) |
 
 **Domain-Kanonisierung:** `http→https` und Apex↔`www` werden auf Cloudflare-Ebene bzw. in
 `middleware.ts` erzwungen (behebt zugleich das abgelaufene TLS-Zertifikat der Alt-Seite).
 Canonical-Wahl (`www` vs. Apex) in Phase 1 festlegen und konsistent halten.
+
+> **Hinweis (Ziel-Seiten):** Die Ziele `oesterreich`, `schweiz` und `wunschflug` existieren noch
+> **nicht** als eigene Produktseiten (`src/data/flights.ts` hat 7 Ziele). Die Alt-URLs leiten
+> daher auf die inhaltlich nächste reale Seite: Österreich → **Ötztal** (Tiroler Alpen),
+> Schweiz → **Matterhorn** (Walliser Alpen), Wunschrundflug → **Anfrageformular**. Sobald diese
+> Ziele als eigene Seiten gebaut sind (Roadmap Phase 5), werden die Redirects darauf umgestellt.
+> Alle `destination`-Werte tragen einen abschließenden Slash (`trailingSlash: true`), um
+> Redirect-Ketten zu vermeiden.
 
 ## 2. Vollständige Alt-URL-Liste (aus `extract/sitemaps/all-urls.txt` = 73 URLs)
 

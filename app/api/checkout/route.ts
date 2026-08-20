@@ -12,6 +12,8 @@ export const runtime = 'nodejs';
 const checkoutSchema = z.object({
   slug: z.string().min(1).max(100),
   quantity: z.number().int().min(1).max(10).default(1),
+  // Kauf als Gutschein (statt Direktbuchung) — nur für die Bezeichnung in Stripe.
+  gift: z.boolean().optional().default(false),
 });
 
 export async function POST(request: NextRequest) {
@@ -45,7 +47,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Ungültige Eingabe.' }, { status: 400 });
   }
 
-  const { slug, quantity } = parsed.data;
+  const { slug, quantity, gift } = parsed.data;
 
   // Preis IMMER serverseitig aus den eigenen Daten auflösen — der Client
   // schickt nur den Slug, nie einen Betrag (Manipulationsschutz).
@@ -68,9 +70,11 @@ export async function POST(request: NextRequest) {
             // Bruttopreise; Stripe extrahiert die USt (kein Aufschlag).
             tax_behavior: 'inclusive',
             product_data: {
-              name: `${flug.name} (${formatDauer(flug.flugzeitMin)})`,
+              name: gift
+                ? `Gutschein: ${flug.name} (${formatDauer(flug.flugzeitMin)})`
+                : `${flug.name} (${formatDauer(flug.flugzeitMin)})`,
               description: flug.kurzbeschreibung.slice(0, 300),
-              metadata: { slug: flug.slug },
+              metadata: { slug: flug.slug, gift: String(gift) },
             },
           },
           quantity,
@@ -85,7 +89,7 @@ export async function POST(request: NextRequest) {
       phone_number_collection: { enabled: true },
       success_url: `${origin}/shop/danke/?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/shop/abbruch/`,
-      metadata: { slug: flug.slug, quantity: String(quantity) },
+      metadata: { slug: flug.slug, quantity: String(quantity), gift: String(gift) },
     } satisfies Stripe.Checkout.SessionCreateParams);
 
     return NextResponse.json({ url: session.url });

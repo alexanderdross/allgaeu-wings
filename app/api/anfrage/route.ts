@@ -12,8 +12,10 @@ const anfrageSchema = z.object({
   personen: z.coerce.number().int().min(1).max(6).optional().default(1),
   termin: z.string().max(200).optional().default(''),
   nachricht: z.string().max(5000).optional().default(''),
-  // Honeypot — Bots füllen versteckte Felder aus.
-  website: z.string().max(0).optional().default(''),
+  // Honeypot — Bots füllen versteckte Felder aus. Bewusst NICHT via max(0)
+  // erzwingen: ein Browser-Autofill des versteckten Felds würde sonst eine
+  // legitime Anfrage mit 400 abweisen. Stattdessen unten still verwerfen.
+  website: z.string().max(200).optional().default(''),
 });
 
 export async function POST(request: NextRequest) {

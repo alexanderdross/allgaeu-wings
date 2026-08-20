@@ -102,7 +102,8 @@ Hyperdrive, falls später eine fertige Admin-Oberfläche gewünscht ist.
 |---|---|
 | Workers | App-Hosting (SSR/SSG/API/Middleware) |
 | Workers Builds | Deploy-CI/CD ab `main` |
-| R2 | ISR-Cache + optional Medien-Archiv |
+| R2 | OpenNext-Seiten-Cache (SSG/ISR) — **nicht** für Bilder |
+| ASSETS | statische Dateien inkl. aller Bilder |
 | KV | Webhook-Idempotenz |
 | D1 | Gutschein-/Anfrage-Datenhaltung |
 | Turnstile | Formular-Spam-Schutz |
