@@ -31,13 +31,19 @@ Inhalt siehe `extract/`:
 Diese Artefakte speisen `02-design-system.md` (Farben), `06-redirect-map.md` (Alt-URLs) und
 `07-shop-stripe.md` (Preise).
 
-## Phase 1 · Cloudflare-Ressourcen anlegen
+## Phase 1 · Cloudflare-Ressourcen anlegen — je Phase, nicht vorab
+
+Für das erste (statische) Deploy sind **keine** Ressourcen nötig (siehe Phase 1b). Die folgenden
+Befehle erst ausführen, wenn die jeweilige Phase sie braucht — dann den passenden Block in
+`wrangler.jsonc` einkommentieren:
 
 ```bash
+# ab spürbarem ISR/revalidate — OpenNext-Seiten-Cache (nicht für Bilder):
 wrangler r2 bucket create allgaeu-wings-inc-cache      # NEXT_INC_CACHE_R2_BUCKET
+# ab Stripe-Webhook:
 wrangler kv namespace create WEBHOOK_IDEMPOTENCY_KV     # Webhook-Idempotenz
+# ab Gutschein-Lifecycle:
 wrangler d1 create allgaeu-wings                        # DB-Binding
-# optional: R2-Bucket für Medien (MEDIA)
 ```
 IDs in `wrangler.jsonc` eintragen. D1-Schema (`vouchers`, `redemptions`, `booking_requests`,
 `webhook_events`) via Drizzle-Migration anwenden.

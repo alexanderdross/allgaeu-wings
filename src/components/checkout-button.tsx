@@ -4,7 +4,15 @@ import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export function CheckoutButton({ slug, label = 'Jetzt buchen' }: { slug: string; label?: string }) {
+export function CheckoutButton({
+  slug,
+  label = 'Jetzt buchen',
+  gift = false,
+}: {
+  slug: string;
+  label?: string;
+  gift?: boolean;
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,7 +23,7 @@ export function CheckoutButton({ slug, label = 'Jetzt buchen' }: { slug: string;
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug, quantity: 1 }),
+        body: JSON.stringify({ slug, quantity: 1, gift }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
       if (res.ok && data.url) {
