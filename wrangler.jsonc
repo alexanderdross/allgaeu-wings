@@ -1,0 +1,53 @@
+{
+  // Cloudflare-Worker-Konfiguration für die Next.js-App (@opennextjs/cloudflare).
+  // Docs: https://opennext.js.org/cloudflare
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "allgaeu-wings",
+  "main": ".open-next/worker.js",
+
+  // Nötig für den Adapter: nodejs_compat + Compat-Date >= 2024-09-23, damit
+  // Stripe und node:crypto auf dem Workers-Runtime laufen.
+  "compatibility_date": "2025-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".open-next/assets"
+  },
+
+  // Inkrementeller Cache (SSG/ISR) in R2:
+  //   wrangler r2 bucket create allgaeu-wings-inc-cache
+  "r2_buckets": [
+    {
+      "binding": "NEXT_INC_CACHE_R2_BUCKET",
+      "bucket_name": "allgaeu-wings-inc-cache"
+    }
+  ],
+
+  // Stripe-Webhook-Idempotenz (24h TTL):
+  //   wrangler kv namespace create WEBHOOK_IDEMPOTENCY_KV
+  "kv_namespaces": [
+    {
+      "binding": "WEBHOOK_IDEMPOTENCY_KV",
+      "id": "REPLACE_WITH_KV_NAMESPACE_ID"
+    }
+  ],
+
+  // Gutscheine/Anfragen (Phase 3):
+  //   wrangler d1 create allgaeu-wings
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "allgaeu-wings",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  },
+
+  // Runtime-Vars (SMTP_*, STRIPE_*, SITE_URL …) werden im Dashboard verwaltet;
+  // keep_vars verhindert, dass jeder Deploy sie löscht.
+  "keep_vars": true
+}

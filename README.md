@@ -4,8 +4,27 @@ Konzept und Dokumentation für den Neubau von [allgaeu-wings.de](https://www.all
 **Next.js-App auf Cloudflare Workers** mit **nativem Stripe-Shop** (Ablösung des Regiondo-iframes).
 Corporate Identity bleibt erhalten, Design wird behutsam modernisiert.
 
-> **Status: Phase 0 — Konzept & Datenbasis.** Dieses Repository enthält aktuell **Dokumentation**,
-> noch keinen Anwendungscode. Der Code-Aufbau ist Phase 1 (`docs/10-roadmap.md`).
+> **Status: Phase 1 — Next.js-Scaffold.** Das Konzept (Phase 0) steht in `docs/`; das lauffähige
+> Next.js-Grundgerüst ist aufgesetzt (Design-Tokens, Layout, datengetriebene Rundflug-/Standort-
+> seiten, Cloudflare-Workers-Konfiguration). Shop/Stripe und Formulare folgen in Phase 3
+> (`docs/10-roadmap.md`).
+
+## Entwicklung
+
+```bash
+pnpm install       # Abhängigkeiten
+pnpm dev           # Dev-Server (http://localhost:3000)
+pnpm lint          # ESLint
+pnpm typecheck     # tsc --noEmit
+pnpm build         # Produktions-Build (+ Sitemap)
+pnpm build:cf      # OpenNext-Cloudflare-Build
+pnpm preview       # lokaler Workers-Preview (wrangler)
+pnpm deploy        # wrangler deploy (i. d. R. via Workers Builds)
+```
+
+**Struktur:** `app/` (App Router) an der Wurzel, `src/components`, `src/lib`, `src/data`
+(`@/*` → `src/*`). CI (`.github/workflows/ci.yml`) prüft Lint · Typecheck · Build auf jedem PR
+nach `main`. Cloudflare-Deploy läuft über Workers Builds (siehe `docs/01-architektur.md`).
 
 ## Warum der Neubau
 
