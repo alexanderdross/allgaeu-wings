@@ -98,6 +98,28 @@ sichtbare Breadcrumbs auf tiefen Seiten. `docs/10-roadmap.md` als veraltet aktua
 - **B4. CWV-Budget in CI.** `.lighthouserc.json` (nach drossnet), Budgets LCP<2,5 s /
   CLS<0,1 / INP<200 ms.
 
+### B5. Mehrsprachigkeit / Übersetzung (Deutsch + Englisch)
+Deutsch bleibt Root **ohne** Präfix, Englisch kommt unter **`/en/`** (docs/04 §Deutsch als
+Root, CLAUDE.md „hreflang/en/ vorbereitet, ungebaut"). Die Alt-Seite hatte bereits EN-Seiten
+(`/imprint`, `/267-2/book-a-scenic-flight`) — Redirects zeigen aktuell nur auf DE.
+
+- **Routing:** App-Router-i18n mit Default-Locale `de` (kein Präfix) und `en` unter `/en/…`.
+  Umsetzung z. B. über ein `locale`-Segment oder Locale-aware Rewrites in `middleware.ts`
+  (Edge, kein Node), `trailingSlash: true` beibehalten. Alle Templates locale-fähig machen.
+- **Inhalte:** Datenmodell zweisprachig (`{ de, en }` je Feld) nach dem Bilingual-Muster aus
+  `drossnet/src/data/flightData.ts` (CLAUDE.md „Content & Daten"); zentrales UI-String-Wörterbuch
+  für Navigation, Buttons, Formulare. Rundflug-Texte, Hero, Hub, Flugerlebnisse, Kontakt zuerst.
+- **SEO:** `hreflang`-Alternates je Seite (`de`, `en`, `x-default`), self-referenzierende
+  Canonicals **pro Locale**, beide Sprachen in Sitemap; `og:locale` + `og:locale:alternate`.
+- **Umfang/Reihenfolge:** Kernseiten zuerst (Start, Rundflüge-Hub + Detailseiten, Alpen-Landing,
+  Flugzeug, Flugerlebnisse, Kontakt). Rechtstexte (Impressum/Datenschutz/AGB/Widerruf) auf EN
+  brauchen separate fachliche Freigabe (siehe Stufe C) und kommen später; bis dahin EN-Seiten
+  mit Verweis auf die DE-Rechtstexte.
+- **Sprachumschalter** im Header/Footer (mit `hreflang`-korrekten Links, Locale bleibt beim
+  Seitenwechsel erhalten).
+- **Aufwand:** größerer, eigener Block (Roadmap-Phase 6). Sinnvoll erst nach den A-Kernseiten,
+  damit nicht zweimal übersetzt wird. Go-live der EN-Version braucht die fertigen Übersetzungen.
+
 ---
 
 ## Stufe C — Fachlich/rechtlich blockiert (nur klären)
