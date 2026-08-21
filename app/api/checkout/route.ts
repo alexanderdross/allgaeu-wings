@@ -12,7 +12,7 @@ export const runtime = 'nodejs';
 const checkoutSchema = z.object({
   slug: z.string().min(1).max(100),
   quantity: z.number().int().min(1).max(10).default(1),
-  // Kauf als Gutschein (statt Direktbuchung) — nur für die Bezeichnung in Stripe.
+  // Kauf als Gutschein (statt Direktbuchung), nur für die Bezeichnung in Stripe.
   gift: z.boolean().optional().default(false),
 });
 
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
 
   const { slug, quantity, gift } = parsed.data;
 
-  // Preis IMMER serverseitig aus den eigenen Daten auflösen — der Client
+  // Preis IMMER serverseitig aus den eigenen Daten auflösen, der Client
   // schickt nur den Slug, nie einen Betrag (Manipulationsschutz).
   const flug = getRundflug(slug);
   if (!flug) {

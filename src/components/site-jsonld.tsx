@@ -1,7 +1,7 @@
 import { business } from '@/data/business';
 import { jsonLdScript } from '@/lib/schema';
 
-// Sitewide Organization + WebSite. Kein SearchAction — es gibt (noch) keine
+// Sitewide Organization + WebSite. Kein SearchAction, es gibt (noch) keine
 // Seitensuche, und Schema soll nur echte Funktionen abbilden.
 export function SiteJsonLd() {
   const organization = {

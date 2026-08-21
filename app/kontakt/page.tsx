@@ -5,7 +5,7 @@ import { business } from '@/data/business';
 
 export const metadata: Metadata = {
   title: 'Kontakt',
-  description: `Kontaktieren Sie ${business.name} — Rundflüge ab Memmingen und Friedrichshafen.`,
+  description: `Kontaktieren Sie ${business.name}, Rundflüge ab Memmingen und Friedrichshafen.`,
   alternates: { canonical: '/kontakt/' },
 };
 

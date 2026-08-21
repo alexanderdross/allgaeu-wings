@@ -1,4 +1,4 @@
-// Navigationsstruktur — siehe docs/03-informationsarchitektur.md.
+// Navigationsstruktur, siehe docs/03-informationsarchitektur.md.
 
 export interface NavItem {
   label: string;

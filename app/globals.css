@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-/* Fonts via next/font (self-hosted, DSGVO) — CSS-Variablen auf <html> gesetzt. */
+/* Fonts via next/font (self-hosted, DSGVO), CSS-Variablen auf <html> gesetzt. */
 
 @theme {
   --breakpoint-xs: 375px;
@@ -32,7 +32,7 @@
 }
 
 /*
-  CI Allgäu Wings — belegt aus extract/css/ + Logo + Screenshots.
+  CI Allgäu Wings, belegt aus extract/css/ + Logo + Screenshots.
   Siehe docs/02-design-system.md.
     Marineblau  #173f68  → Header/Footer/CTA (Primär)
     Akzentblau  #2ea3f2  → Links/Buttons

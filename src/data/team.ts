@@ -1,4 +1,4 @@
-// Team — belegt aus extract/html/wer-wir-sind.html.
+// Team, belegt aus extract/html/wer-wir-sind.html.
 
 export interface TeamMitglied {
   name: string;

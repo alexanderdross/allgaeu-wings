@@ -15,7 +15,7 @@ export function LegalLayout({
       <PageHeader title={title} />
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <p className="mb-8 rounded-lg border border-destructive/30 bg-destructive/5 p-4 text-sm text-muted-foreground">
-          <strong className="text-foreground">Entwurf – rechtlich zu prüfen.</strong> Dieser Text
+          <strong className="text-foreground">Entwurf, rechtlich zu prüfen.</strong> Dieser Text
           ist ein fachlich noch nicht freigegebener Entwurf für den Neubau und ersetzt keine
           Rechtsberatung. Vor dem Livegang durch eine fachkundige Stelle prüfen lassen
           (siehe <code>docs/08-recht-compliance.md</code>). Stand: {stand}.

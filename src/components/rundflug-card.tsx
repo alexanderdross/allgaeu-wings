@@ -13,7 +13,7 @@ export function RundflugCard({ flug }: { flug: Rundflug }) {
         <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-primary to-[#2a5a8f]">
           <Image
             src={flug.bild}
-            alt={`${flug.name} – Luftaufnahme der Region ${flug.region}`}
+            alt={`${flug.name}, Luftaufnahme der Region ${flug.region}`}
             fill
             placeholder="blur"
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"

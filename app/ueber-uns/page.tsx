@@ -5,9 +5,9 @@ import { breadcrumbJsonLd, jsonLdScript } from '@/lib/schema';
 import { team } from '@/data/team';
 
 export const metadata: Metadata = {
-  title: 'Über uns — das Team von Allgäu Wings',
+  title: 'Über uns, das Team von Allgäu Wings',
   description:
-    'Allgäu Wings wurde von Fliegerkameraden gegründet. Lernen Sie Geschäftsführung und Team kennen — ' +
+    'Allgäu Wings wurde von Fliegerkameraden gegründet. Lernen Sie Geschäftsführung und Team kennen, ' +
     'Piloten, Ingenieure und Fluglehrer mit einem Ziel: Fliegen zum unvergesslichen Erlebnis machen.',
   alternates: { canonical: '/ueber-uns/' },
 };
@@ -32,7 +32,7 @@ export default function UeberUnsPage() {
             Die <strong className="text-foreground">Allgäu Wings GmbH</strong> wurde von fünf
             Arbeitskollegen und Fliegerkameraden gegründet, die schon lange zuvor durch viele
             fantastische Aspekte des Fliegens miteinander verbunden waren. Fest entschlossen, dies
-            weiter auszubauen und mit anderen Menschen zu teilen, packen wir das nun an – mit Ihnen!
+            weiter auszubauen und mit anderen Menschen zu teilen, packen wir das nun an, mit Ihnen!
           </p>
           <p>
             Zusammen mit sieben weiteren Piloten, Gesellschaftern, Ingenieuren, Fluglehrern und

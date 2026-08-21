@@ -28,7 +28,7 @@ export default function AgbPage() {
       <h2 id="preise">3. Preise und Umsatzsteuer</h2>
       <p>
         Alle Preise verstehen sich als Endpreise in Euro inklusive der gesetzlichen Umsatzsteuer.
-        Der konkret anwendbare Umsatzsteuersatz — insbesondere bei grenzüberschreitenden Strecken —
+        Der konkret anwendbare Umsatzsteuersatz, insbesondere bei grenzüberschreitenden Strecken, 
         ist noch abschließend zu bestimmen (siehe Entwurfshinweis).
       </p>
 
