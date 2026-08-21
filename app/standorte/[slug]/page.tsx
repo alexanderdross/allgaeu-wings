@@ -35,6 +35,8 @@ export default async function StandortDetail({ params }: { params: Promise<{ slu
     telephone: business.phone,
     url: `https://www.allgaeu-wings.de/standorte/${s.id}/`,
     address: { '@type': 'PostalAddress', addressLocality: s.name, addressCountry: 'DE' },
+    geo: { '@type': 'GeoCoordinates', latitude: s.geo.lat, longitude: s.geo.lng },
+    areaServed: s.region,
   };
 
   return (

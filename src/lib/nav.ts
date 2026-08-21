@@ -12,6 +12,7 @@ export const mainNav: NavItem[] = [
     href: '/rundfluege/',
     children: [
       { label: 'Alle Rundflüge', href: '/rundfluege/' },
+      { label: 'Alpenrundflüge', href: '/rundfluege/alpen/' },
       { label: 'Zugspitze', href: '/rundfluege/zugspitze/' },
       { label: 'Bodensee', href: '/rundfluege/bodensee/' },
       { label: 'Matterhorn', href: '/rundfluege/matterhorn/' },

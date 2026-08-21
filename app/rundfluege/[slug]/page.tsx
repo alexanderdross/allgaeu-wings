@@ -12,7 +12,7 @@ import {
   formatDauer,
   flugzeug,
 } from '@/data/flights';
-import { breadcrumbJsonLd, jsonLdScript } from '@/lib/schema';
+import { breadcrumbJsonLd, jsonLdScript, touristAttractionJsonLd, flugBildUrl } from '@/lib/schema';
 import { CheckoutButton } from '@/components/checkout-button';
 
 export function generateStaticParams() {
@@ -43,6 +43,7 @@ export default async function RundflugDetail({ params }: { params: Promise<{ slu
     '@type': 'Product',
     name: flug.name,
     description: flug.kurzbeschreibung,
+    image: flugBildUrl(flug.slug),
     brand: { '@type': 'Brand', name: 'Allgäu Wings' },
     offers: {
       '@type': 'Offer',
@@ -56,6 +57,7 @@ export default async function RundflugDetail({ params }: { params: Promise<{ slu
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(touristAttractionJsonLd(flug))} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLdScript(
