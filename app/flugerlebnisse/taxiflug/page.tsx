@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const eckdaten = [
   { icon: MapPin, label: 'Abflug', value: 'Memmingen (EDJA) oder Friedrichshafen (EDNY)' },
-  { icon: Users, label: 'Plätze', value: 'bis zu 3 Gäste' },
+  { icon: Users, label: 'Plätze', value: 'bis zu 5 Gäste' },
   { icon: Gauge, label: 'Reisegeschwindigkeit', value: 'rund 330 bis 355 km/h (179 bis 191 Knoten)' },
   { icon: Clock, label: 'Preis und Termin', value: 'auf Anfrage, individuell abgestimmt' },
 ];

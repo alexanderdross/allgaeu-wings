@@ -222,13 +222,13 @@ export const flugzeug: Flugzeug = {
   slug: 'cessna-p210n',
   name: 'Cessna P210N',
   typ: 'Einmotoriges Reiseflugzeug mit Druckkabine',
-  maxPassagiere: 3, // TODO: mit Betrieb bestätigen
+  maxPassagiere: 5, // 5 Passagiere plus Pilot (6 Sitze), mit Betrieb bestätigt
   beschreibung:
     'Die Cessna P210N Pressurized Centurion ist ein Hochleistungs-Reiseflugzeug mit Druckkabine, ' +
     'ideal für hochalpine Rundflüge, weil sie komfortabel über die Alpengipfel steigt.',
   specs: [
     { label: 'Typ', value: 'Hochdecker mit Druckkabine' },
-    { label: 'Passagiere', value: 'bis zu 3' },
+    { label: 'Passagiere', value: 'bis zu 5 (plus Pilot)' },
     { label: 'Reisegeschwindigkeit', value: 'rund 330 bis 355 km/h (179 bis 191 kn)' },
     { label: 'Einsatz', value: 'Alpen-Rundflüge, Charter, IFR' },
   ],
