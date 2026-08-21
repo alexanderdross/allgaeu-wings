@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/page-header';
 import { CheckoutButton } from '@/components/checkout-button';
 import { Card, CardContent } from '@/components/ui/card';
 import { rundfluege, formatPreis, formatDauer } from '@/data/flights';
+import { business } from '@/data/business';
 
 export const metadata: Metadata = {
   title: 'Rundflug-Gutscheine verschenken',
@@ -13,9 +14,30 @@ export const metadata: Metadata = {
   alternates: { canonical: '/gutscheine/' },
 };
 
+const preise = rundfluege.map((f) => f.preis);
+const giftProductJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Rundflug-Gutschein',
+  category: 'GiftCard',
+  description:
+    'Gutschein für einen Allgäu-Wings-Rundflug, flexibel einlösbar und drei Jahre gültig.',
+  brand: { '@type': 'Brand', name: business.shortName },
+  url: `${business.siteUrl}/gutscheine/`,
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'EUR',
+    lowPrice: Math.min(...preise),
+    highPrice: Math.max(...preise),
+    offerCount: rundfluege.length,
+    availability: 'https://schema.org/InStock',
+  },
+};
+
 export default function GutscheinePage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(giftProductJsonLd) }} />
       <PageHeader
         title="Rundflug-Gutscheine"
         lead="Das perfekte Geschenk, flexibel einlösbar, drei Jahre gültig, für jedes Ziel."
