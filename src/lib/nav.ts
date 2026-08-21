@@ -33,6 +33,7 @@ export const mainNav: NavItem[] = [
     label: 'Flugerlebnisse',
     href: '/flugerlebnisse/',
     children: [
+      { label: 'Taxiflug', href: '/flugerlebnisse/taxiflug/' },
       { label: 'A320 Flugsimulator', href: '/flugerlebnisse/a320-flugsimulator/' },
       { label: 'Flugangstseminar', href: '/flugerlebnisse/flugangstseminar/' },
     ],
@@ -57,6 +58,7 @@ export const footerNav = {
     title: 'Mehr',
     links: [
       { label: 'Flugzeug Cessna P210N', href: '/flugzeug/cessna-p210n/' },
+      { label: 'Taxiflug', href: '/flugerlebnisse/taxiflug/' },
       { label: 'A320 Flugsimulator', href: '/flugerlebnisse/a320-flugsimulator/' },
       { label: 'Flugangstseminar', href: '/flugerlebnisse/flugangstseminar/' },
       { label: 'Gutscheine', href: '/gutscheine/' },

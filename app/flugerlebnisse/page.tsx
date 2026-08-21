@@ -4,11 +4,12 @@ import { PageHeader } from '@/components/page-header';
 
 export const metadata: Metadata = {
   title: 'Flugerlebnisse',
-  description: 'A320 Flugsimulator und Flugangstseminar bei Allgäu Wings.',
+  description: 'Taxiflug, A320 Flugsimulator und Flugangstseminar bei Allgäu Wings.',
   alternates: { canonical: '/flugerlebnisse/' },
 };
 
 const erlebnisse = [
+  { title: 'Taxiflug', href: '/flugerlebnisse/taxiflug/', text: 'Schnell und direkt ans Ziel, individuell auf Anfrage.' },
   { title: 'A320 Flugsimulator', href: '/flugerlebnisse/a320-flugsimulator/', text: 'Selbst am Steuer eines Airbus A320, mit Instruktor.' },
   { title: 'Flugangstseminar', href: '/flugerlebnisse/flugangstseminar/', text: 'Flugangst verstehen und überwinden.' },
 ];
