@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
+import { sendMail } from '@/lib/mailer';
 
 export const runtime = 'nodejs';
 
@@ -86,17 +87,33 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // TODO (eigener Workers-PR, via build:cf/preview verifiziert):
-  //  1. Versand per worker-mailer (importiert cloudflare:sockets → nur auf
-  //     dem Workers-Runtime lauffähig, bricht `next build` unter Node).
-  //  2. Optional Persistenz in D1 (booking_requests).
-  // Bis dahin wird die Anfrage serverseitig protokolliert und bestätigt.
-  console.info('[anfrage] eingegangen:', {
-    name: data.name,
-    email: data.email,
-    ziel: data.ziel,
-    personen: data.personen,
+  // Versand per worker-mailer (nur auf dem Workers-Runtime, siehe src/lib/mailer.ts).
+  // Ohne gesetzte SMTP_*-Vars ist delivered=false, die Anfrage wird dann nur
+  // protokolliert. Optionale D1-Persistenz (booking_requests) folgt mit Stufe B3.
+  const delivered = await sendMail({
+    subject: `[Website] Anfrage: ${data.ziel || 'Rundflug'}`,
+    replyTo: { name: data.name, email: data.email },
+    text: [
+      `Name: ${data.name}`,
+      `E-Mail: ${data.email}`,
+      `Telefon: ${data.phone || '-'}`,
+      `Wunsch-Rundflug: ${data.ziel || '-'}`,
+      `Personen: ${data.personen}`,
+      `Wunschtermin: ${data.termin || '-'}`,
+      '',
+      'Nachricht:',
+      data.nachricht || '-',
+    ].join('\n'),
   });
 
-  return NextResponse.json({ ok: true, delivered: false });
+  if (!delivered) {
+    console.info('[anfrage] eingegangen (nicht per Mail zugestellt):', {
+      name: data.name,
+      email: data.email,
+      ziel: data.ziel,
+      personen: data.personen,
+    });
+  }
+
+  return NextResponse.json({ ok: true, delivered });
 }

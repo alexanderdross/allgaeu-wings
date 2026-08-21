@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   // Deckungsgleich mit den WordPress-Alt-URLs; hält die 301-Redirects sauber.
   trailingSlash: true,
 
+  // worker-mailer importiert `cloudflare:sockets` (Workers-Runtime-Builtin) und
+  // darf daher nicht in den Node-Server-Bundle gezogen werden, sonst scheitert
+  // `next build` an der Auflösung. Als externes Paket bleibt der Import zur
+  // Laufzeit erhalten; wrangler/OpenNext externalisieren `cloudflare:*` auf dem
+  // Workers-Runtime automatisch (verifiziert über `pnpm build:cf`).
+  serverExternalPackages: ['worker-mailer'],
+
   images: {
     // Auf Cloudflare Workers gibt es keinen Vercel-Bildoptimierer. Ein eigener
     // Loader steuert die Bild-URLs: standardmäßig das Original, mit

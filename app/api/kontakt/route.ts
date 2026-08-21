@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
+import { sendMail } from '@/lib/mailer';
 
 export const runtime = 'nodejs';
 
@@ -82,15 +83,31 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // TODO (eigener Workers-PR, via build:cf/preview verifiziert): Versand per
-  // worker-mailer (importiert cloudflare:sockets, laeuft nur auf dem
-  // Workers-Runtime und bricht `next build` unter Node). Bis dahin wird die
-  // Nachricht serverseitig protokolliert und bestaetigt.
-  console.info('[kontakt] Nachricht:', {
-    name: data.name,
-    email: data.email,
-    betreff: data.betreff,
+  // Versand per worker-mailer (nur auf dem Workers-Runtime, siehe src/lib/mailer.ts).
+  // Ohne gesetzte SMTP_*-Vars ist delivered=false; die Nachricht wird dann nur
+  // protokolliert. Der Nutzer erhaelt in beiden Faellen eine Bestaetigung.
+  const betreff = data.betreff?.trim() || 'Kontaktformular';
+  const delivered = await sendMail({
+    subject: `[Website] Kontakt: ${betreff}`,
+    replyTo: { name: data.name, email: data.email },
+    text: [
+      `Name: ${data.name}`,
+      `E-Mail: ${data.email}`,
+      `Telefon: ${data.phone || '-'}`,
+      `Betreff: ${data.betreff || '-'}`,
+      '',
+      'Nachricht:',
+      data.nachricht,
+    ].join('\n'),
   });
 
-  return NextResponse.json({ ok: true, delivered: false });
+  if (!delivered) {
+    console.info('[kontakt] Nachricht (nicht per Mail zugestellt):', {
+      name: data.name,
+      email: data.email,
+      betreff: data.betreff,
+    });
+  }
+
+  return NextResponse.json({ ok: true, delivered });
 }
