@@ -1,7 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PageHeader } from '@/components/page-header';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 import { breadcrumbJsonLd, faqJsonLd, jsonLdScript } from '@/lib/schema';
+
+const crumbs = [
+  { name: 'Start', path: '/' },
+  { name: 'FAQ', path: '/faq/' },
+];
 
 export const metadata: Metadata = {
   title: 'Häufige Fragen zu Rundflügen',
@@ -50,15 +56,11 @@ export default function FaqPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(faqJsonLd(faqs))} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={jsonLdScript(
-          breadcrumbJsonLd([
-            { name: 'Start', path: '/' },
-            { name: 'FAQ', path: '/faq/' },
-          ]),
-        )}
+        dangerouslySetInnerHTML={jsonLdScript(breadcrumbJsonLd(crumbs))}
       />
 
       <PageHeader title="Häufige Fragen" lead="Antworten rund um Ihren Rundflug bei Allgäu Wings." />
+      <Breadcrumbs items={crumbs} />
 
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <dl className="space-y-8">
