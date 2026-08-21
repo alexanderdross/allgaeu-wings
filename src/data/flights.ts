@@ -27,6 +27,8 @@ export interface Standort {
   icao: string;
   region: string;
   beschreibung: string;
+  /** Flughafen-Koordinaten (öffentlich, für LocalBusiness-geo). */
+  geo: { lat: number; lng: number };
 }
 
 export interface Rundflug {
@@ -69,6 +71,7 @@ export const standorte: Standort[] = [
     region: 'Allgäu',
     beschreibung:
       'Unser Hauptabflugort im Allgäu. Von hier starten die Alpen-Rundflüge Richtung Zugspitze, Alpenhauptkamm und Süden.',
+    geo: { lat: 47.9888, lng: 10.2395 },
   },
   {
     id: 'friedrichshafen',
@@ -78,6 +81,7 @@ export const standorte: Standort[] = [
     region: 'Bodensee',
     beschreibung:
       'Abflug direkt am Bodensee, ideal für Bodensee-Rundflüge und den Einstieg in die Alpen von Westen.',
+    geo: { lat: 47.6713, lng: 9.5115 },
   },
 ];
 
