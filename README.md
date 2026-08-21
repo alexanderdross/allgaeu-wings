@@ -1,13 +1,15 @@
-# Allgäu Wings — Website-Neubau
+# Allgäu Wings, Website-Neubau
 
 Konzept und Dokumentation für den Neubau von [allgaeu-wings.de](https://www.allgaeu-wings.de/) als
 **Next.js-App auf Cloudflare Workers** mit **nativem Stripe-Shop** (Ablösung des Regiondo-iframes).
 Corporate Identity bleibt erhalten, Design wird behutsam modernisiert.
 
-> **Status: Phase 1 — Next.js-Scaffold.** Das Konzept (Phase 0) steht in `docs/`; das lauffähige
-> Next.js-Grundgerüst ist aufgesetzt (Design-Tokens, Layout, datengetriebene Rundflug-/Standort-
-> seiten, Cloudflare-Workers-Konfiguration). Shop/Stripe und Formulare folgen in Phase 3
-> (`docs/10-roadmap.md`).
+> **Status: live auf Cloudflare Workers (Phasen 0 bis 2 umgesetzt).** Konzept (Phase 0) in `docs/`;
+> Design-System, Layout, datengetriebene Rundflug-/Standort-/Flugerlebnis-Seiten, Galerie, FAQ,
+> Ratgeber, JSON-LD, Redirect-Map und Kontakt-/Anfrageformular mit Turnstile stehen. Die Seite läuft
+> auf `allgaeu-wings.allgaeuwings.workers.dev` (noch nicht auf der Zieldomain). **Stufe A des
+> Verbesserungsplans (`docs/11-verbesserungsplan.md`) ist abgeschlossen.** Offen: Stripe scharf
+> schalten mit Webhook und Gutschein-Lifecycle (Phase 3), Cutover (Phase 4).
 
 ## Entwicklung
 
@@ -28,11 +30,11 @@ nach `main`. Cloudflare-Deploy läuft über Workers Builds (siehe `docs/01-archi
 
 ## Warum der Neubau
 
-- Der Verkauf läuft über einen **Regiondo-iframe** — fremde Domain, keine eigenen Kundendaten,
+- Der Verkauf läuft über einen **Regiondo-iframe**, fremde Domain, keine eigenen Kundendaten,
   kein SEO-Wert.
 - Nur **~29 % der URLs sind bei Google indexiert** (30 von ~102).
 - Für nachfragestarke Ziel-Begriffe („alpenrundflug", „rundflug bodensee", „gardasee") fehlen
-  eigene Landingpages — die Startseite rankt breit und schwach.
+  eigene Landingpages, die Startseite rankt breit und schwach.
 - Die Live-Seite hat ein **ungültiges TLS-Zertifikat**.
 
 Vollständige Analyse: [`docs/05-gsc-analyse.md`](docs/05-gsc-analyse.md).
@@ -52,6 +54,7 @@ Vollständige Analyse: [`docs/05-gsc-analyse.md`](docs/05-gsc-analyse.md).
 | 08 | [Recht & Compliance](docs/08-recht-compliance.md) | DSGVO, Widerruf, USt |
 | 09 | [Migrations-Runbook](docs/09-migration-runbook.md) | Cutover, Rollback |
 | 10 | [Roadmap](docs/10-roadmap.md) | Phasen, Aufwand |
+| 11 | [Verbesserungsplan](docs/11-verbesserungsplan.md) | Priorisierte Verbesserungen (SEO/Funktion/UX), Stufen A/B/C |
 
 Arbeitsanweisung für Claude Code: [`CLAUDE.md`](CLAUDE.md).
 
@@ -67,17 +70,19 @@ Next.js 16 (App Router, TS)  ──build:cf──▶  @opennextjs/cloudflare  �
 
 ## Datengrundlage
 
-- `data/gsc/` — Google-Search-Console-Exporte (Performance + Coverage), 19.05.–18.08.2026.
-- `extract/` — Rohextraktion der Live-Seite (HTML, CSS/Farben, Assets, Screenshots, Shop-Daten),
+- `data/gsc/`, Google-Search-Console-Exporte (Performance + Coverage), 19.05. bis 18.08.2026.
+- `extract/`, Rohextraktion der Live-Seite (HTML, CSS/Farben, Assets, Screenshots, Shop-Daten),
   erzeugt durch eine separate Fetcher-Session (siehe [Runbook Phase 0](docs/09-migration-runbook.md)).
 
 ## Referenz
 
 Das Repository [`alexanderdross/drossnet`](https://github.com/alexanderdross/drossnet)
-(Sektion Dross:Air) dient als **read-only Architektur-Vorbild** — dieselbe Domäne (Rundflüge,
+(Sektion Dross:Air) dient als **read-only Architektur-Vorbild**, dieselbe Domäne (Rundflüge,
 Standorte, Ziele, Gutscheine), derselbe Stack, produktiv erprobte Cloudflare-Migration.
 
 ## Nächster Schritt
 
-Phase 1 aus der [Roadmap](docs/10-roadmap.md): Next.js-Scaffold, Design-Tokens aus der Extraktion,
-Cloudflare-Ressourcen, deploybares Grundgerüst.
+Stufe A des [Verbesserungsplans](docs/11-verbesserungsplan.md) ist abgeschlossen. Als Nächstes
+Stufe B (Go-live braucht Config/Keys: echter Mailversand, Turnstile-Schlüssel, Stripe scharf
+schalten mit Webhook und Gutschein-Lifecycle, CWV-Budget, Mehrsprachigkeit DE/EN) sowie die
+fachlichen Klärungen aus Stufe C.
