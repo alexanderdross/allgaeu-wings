@@ -9,7 +9,14 @@
     "pnpm": ">=10"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["workerd", "esbuild", "unrs-resolver"]
+    "onlyBuiltDependencies": [
+      "workerd",
+      "esbuild",
+      "unrs-resolver"
+    ],
+    "patchedDependencies": {
+      "@opennextjs/cloudflare@1.20.2": "patches/@opennextjs__cloudflare@1.20.2.patch"
+    }
   },
   "scripts": {
     "dev": "next dev",
@@ -35,6 +42,7 @@
     "react-dom": "^19.0.0",
     "stripe": "^17.5.0",
     "tailwind-merge": "^2.6.0",
+    "worker-mailer": "^1.2.1",
     "zod": "^3.24.1"
   },
   "devDependencies": {
