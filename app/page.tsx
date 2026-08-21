@@ -1,8 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Plane, Users, Award, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { RundflugCard } from '@/components/rundflug-card';
 import { rundfluege, standorte } from '@/data/flights';
+import heroAlpen from '../public/img/hero-alpen.jpg';
 
 // Organization/WebSite-JSON-LD wird sitewide über SiteJsonLd (app/layout.tsx) gesetzt.
 
@@ -11,7 +13,22 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary to-[#0d2a4a] text-white">
-        <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        {/* LCP-Bild: statischer Import (auto Größe + Blur), priority statt lazy. */}
+        <Image
+          src={heroAlpen}
+          alt="Cessna P210N der Allgäu Wings im Flug über den Alpen"
+          fill
+          priority
+          placeholder="blur"
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Overlay für Textlesbarkeit (Text links, Motiv rechts). */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/70 to-primary/20"
+        />
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <span className="rounded-full bg-white/10 px-3 py-1 text-sm font-medium">
             Ab Memmingen &amp; Friedrichshafen
           </span>
