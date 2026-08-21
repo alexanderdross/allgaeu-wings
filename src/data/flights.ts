@@ -5,6 +5,19 @@
 // Personenzahl je Flug und die Preis-Diskrepanz (Regiondo 489 € vs. WP „444 € p. P.")
 // sind mit dem Betrieb zu klären — siehe docs/07-shop-stripe.md §2.1.
 
+import type { StaticImageData } from 'next/image';
+
+// Statische Bild-Importe: Next.js liefert Breite/Höhe + Blur-Placeholder automatisch
+// (siehe https://nextjs.org/docs/app/getting-started/images). Motive: Original-Fotos
+// der Alt-Seite bzw. Regiondo-Produktbilder (Vendor 11122), 600×400.
+import bildZugspitze from '../../public/img/rundfluege/zugspitze.jpg';
+import bildBodensee from '../../public/img/rundfluege/bodensee.jpg';
+import bildOetztal from '../../public/img/rundfluege/oetztal.jpg';
+import bildGrossglockner from '../../public/img/rundfluege/grossglockner.jpg';
+import bildMatterhorn from '../../public/img/rundfluege/matterhorn.jpg';
+import bildMontBlanc from '../../public/img/rundfluege/mont-blanc.jpg';
+import bildDolomitenGardasee from '../../public/img/rundfluege/dolomiten-gardasee.jpg';
+
 export type Kategorie = 'alpen' | 'see' | 'berg' | 'wunsch';
 
 export interface Standort {
@@ -32,6 +45,8 @@ export interface Rundflug {
   popular?: boolean;
   /** Noch ohne belegte GSC-Nachfrage, aber als Regiondo-Produkt vorhanden. */
   neu?: boolean;
+  /** Kartenmotiv (600×400), statisch importiert für automatische Größen + Blur-Placeholder. */
+  bild: StaticImageData;
 }
 
 export interface Flugzeug {
@@ -67,6 +82,7 @@ export const standorte: Standort[] = [
 export const rundfluege: Rundflug[] = [
   {
     slug: 'zugspitze',
+    bild: bildZugspitze,
     name: 'Zugspitze Rundflug',
     region: 'Allgäu & Zugspitze',
     standortId: 'memmingen',
@@ -81,6 +97,7 @@ export const rundfluege: Rundflug[] = [
   },
   {
     slug: 'bodensee',
+    bild: bildBodensee,
     name: 'Bodensee Rundflug',
     region: 'Bodensee & Alpenvorland',
     standortId: 'friedrichshafen',
@@ -95,6 +112,7 @@ export const rundfluege: Rundflug[] = [
   },
   {
     slug: 'oetztal',
+    bild: bildOetztal,
     name: 'Ötztal Rundflug',
     region: 'Tiroler Alpen',
     standortId: 'memmingen',
@@ -109,6 +127,7 @@ export const rundfluege: Rundflug[] = [
   },
   {
     slug: 'grossglockner',
+    bild: bildGrossglockner,
     name: 'Großglockner Rundflug',
     region: 'Hohe Tauern',
     standortId: 'memmingen',
@@ -123,6 +142,7 @@ export const rundfluege: Rundflug[] = [
   },
   {
     slug: 'matterhorn',
+    bild: bildMatterhorn,
     name: 'Matterhorn Rundflug',
     region: 'Walliser Alpen',
     standortId: 'memmingen',
@@ -136,6 +156,7 @@ export const rundfluege: Rundflug[] = [
   },
   {
     slug: 'mont-blanc',
+    bild: bildMontBlanc,
     name: 'Mont Blanc Rundflug',
     region: 'Savoyer Alpen',
     standortId: 'memmingen',
@@ -149,6 +170,7 @@ export const rundfluege: Rundflug[] = [
   },
   {
     slug: 'dolomiten-gardasee',
+    bild: bildDolomitenGardasee,
     name: 'Dolomiten & Gardasee Rundflug',
     region: 'Südtirol & Gardasee',
     standortId: 'memmingen',

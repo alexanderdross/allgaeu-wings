@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Clock, MapPin, ChevronRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -9,9 +10,15 @@ export function RundflugCard({ flug }: { flug: Rundflug }) {
   return (
     <Link href={`/rundfluege/${flug.slug}/`} className="group block h-full" aria-label={`${flug.name} ansehen und buchen`}>
       <Card className="flex h-full flex-col overflow-hidden hover:border-accent/60 hover:shadow-xl">
-        {/* Bildplatzhalter — Motive kommen aus extract/assets in Phase 2 */}
-        <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-gradient-to-br from-primary to-[#2a5a8f]">
-          <span className="font-heading text-2xl font-bold text-white/90">{flug.region}</span>
+        <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-primary to-[#2a5a8f]">
+          <Image
+            src={flug.bild}
+            alt={`${flug.name} – Luftaufnahme der Region ${flug.region}`}
+            fill
+            placeholder="blur"
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
           <div className="absolute right-3 top-3 flex gap-2">
             {flug.popular && <Badge variant="popular">Beliebt</Badge>}
             {flug.neu && <Badge variant="accent">Neu</Badge>}
