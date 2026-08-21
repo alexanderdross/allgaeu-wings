@@ -67,7 +67,10 @@ export function SiteHeader() {
 
       {/* Mobile-Drawer */}
       <div className={cn('lg:hidden', open ? 'block' : 'hidden')}>
-        <nav className="space-y-1 border-t border-white/10 bg-primary px-4 pb-6 pt-2" aria-label="Mobile Navigation">
+        <nav
+          className="max-h-[calc(100dvh-4rem)] space-y-1 overflow-y-auto overscroll-contain border-t border-white/10 bg-primary px-4 pb-6 pt-2"
+          aria-label="Mobile Navigation"
+        >
           {mainNav.map((item) => (
             <div key={item.href}>
               <Link
