@@ -2,8 +2,15 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
 import { PageHeader } from '@/components/page-header';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 import { Button } from '@/components/ui/button';
 import { breadcrumbJsonLd, faqJsonLd, jsonLdScript } from '@/lib/schema';
+
+const crumbs = [
+  { name: 'Start', path: '/' },
+  { name: 'Ratgeber', path: '/ratgeber/hubschrauber-oder-flugzeug-rundflug/' },
+  { name: 'Hubschrauber oder Flugzeug', path: '/ratgeber/hubschrauber-oder-flugzeug-rundflug/' },
+];
 
 export const metadata: Metadata = {
   title: 'Hubschrauber oder Flugzeug: welcher Alpen-Rundflug passt?',
@@ -50,19 +57,14 @@ export default function RatgeberHubschrauberPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(faqJsonLd(faqs))} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={jsonLdScript(
-          breadcrumbJsonLd([
-            { name: 'Start', path: '/' },
-            { name: 'Ratgeber', path: '/ratgeber/hubschrauber-oder-flugzeug-rundflug/' },
-            { name: 'Hubschrauber oder Flugzeug', path: '/ratgeber/hubschrauber-oder-flugzeug-rundflug/' },
-          ]),
-        )}
+        dangerouslySetInnerHTML={jsonLdScript(breadcrumbJsonLd(crumbs))}
       />
 
       <PageHeader
         title="Hubschrauber oder Flugzeug-Rundflug?"
         lead="Welche Art Rundflug passt zu einem Erlebnis über den Alpen? Der ehrliche Vergleich."
       />
+      <Breadcrumbs items={crumbs} />
 
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
