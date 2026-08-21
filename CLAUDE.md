@@ -14,9 +14,10 @@ bleibt, Design wird behutsam modernisiert. Architektur-Vorbild: die Dross:Air-Se
 **Status:** Phasen 0 bis 2 umgesetzt, die Seite läuft live auf
 `allgaeu-wings.allgaeuwings.workers.dev` (noch nicht auf der Zieldomain). Phase 3 ist teilweise
 gebaut (Kontakt- und Anfrageformular mit Turnstile, Stripe-Checkout als Gerüst, 503-gated ohne
-Keys). **Stufe A des Verbesserungsplans (`docs/11-verbesserungsplan.md`) ist abgeschlossen.**
-Offen: Stripe-Webhook und Gutschein-Lifecycle (D1/KV), Cutover, Stufe B/C. Reihenfolge und
-Ist-Stand in `docs/10-roadmap.md` und `docs/11-verbesserungsplan.md`.
+Keys). **Stufe A des Verbesserungsplans (`docs/11-verbesserungsplan.md`) ist abgeschlossen,
+Stufe B1 (echter Formularversand per worker-mailer) ist umgesetzt** (SMTP-Keys folgen).
+Offen: Stripe-Webhook und Gutschein-Lifecycle (D1/KV), Cutover, Rest von Stufe B/C. Reihenfolge
+und Ist-Stand in `docs/10-roadmap.md` und `docs/11-verbesserungsplan.md`.
 
 ## Dokumentations-Index (`docs/`)
 
@@ -77,6 +78,12 @@ erprobt in `drossnet`):
 3. **Bilder:** Custom `next/image`-Loader → Cloudflare Image Transformations (aus drossnet
    übernehmen). Fallback: Originale ausliefern.
 4. **E-Mail: `worker-mailer`**, **nie nodemailer** (SMTP-Sockets laufen nicht auf Workers).
+   Umgesetzt in `src/lib/mailer.ts` (dynamischer Import). Zwei Build-Vorkehrungen nötig, weil
+   `worker-mailer` `cloudflare:sockets` nutzt: `serverExternalPackages: ['worker-mailer']` in
+   `next.config.ts` (sonst bricht `next build` unter Node) und der committete
+   `pnpm patch` `patches/@opennextjs__cloudflare@1.20.2.patch`, der `cloudflare:*` als
+   esbuild-external markiert (sonst bricht `build:cf`). Beides entfällt bei einem
+   Toolchain-Upgrade (wrangler 4 / neueres `@opennextjs/cloudflare`).
 5. **Rate-Limiting bleibt In-Memory** (per Isolate). KV taugt nicht für atomare Fenster.
 6. **`trailingSlash: true`**, deckungsgleich mit Alt-URLs.
 7. **Webhook-Idempotenz doppelt:** KV (Replay) **und** Stripe-Metadaten/D1 (dauerhaft).
