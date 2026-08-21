@@ -40,13 +40,13 @@ export default function HomePage() {
             Rundflüge zur Zugspitze, zum Matterhorn und Mont Blanc, über Bodensee, Dolomiten und
             Gardasee, an Bord der Cessna P210N mit Druckkabine.
           </p>
-          <div className="flex flex-wrap gap-3">
-            <Button asChild variant="accent" size="lg">
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+            <Button asChild variant="accent" size="lg" className="w-full sm:w-auto">
               <Link href="/rundfluege/">
                 Rundflug buchen <ChevronRight className="h-5 w-5" aria-hidden />
               </Link>
             </Button>
-            <Button asChild variant="outlineLight" size="lg">
+            <Button asChild variant="outlineLight" size="lg" className="w-full sm:w-auto">
               <Link href="/kontakt/">Beraten lassen</Link>
             </Button>
           </div>
@@ -117,11 +117,11 @@ export default function HomePage() {
           <p className="mx-auto mt-3 max-w-xl text-white/80">
             Rundflug-Gutscheine sind das perfekte Geschenk, flexibel einlösbar und drei Jahre gültig.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button asChild variant="accent" size="lg">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+            <Button asChild variant="accent" size="lg" className="w-full sm:w-auto">
               <Link href="/gutscheine/">Zu den Gutscheinen</Link>
             </Button>
-            <Button asChild variant="outlineLight" size="lg">
+            <Button asChild variant="outlineLight" size="lg" className="w-full sm:w-auto">
               <Link href="/kontakt/">Kontakt aufnehmen</Link>
             </Button>
           </div>
