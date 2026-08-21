@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { PageHeader } from '@/components/page-header';
+import { KontaktForm } from '@/components/kontakt-form';
 import { business } from '@/data/business';
 
 export const metadata: Metadata = {
@@ -48,10 +49,17 @@ export default function KontaktPage() {
           </div>
         </dl>
 
-        <p className="mt-10 rounded-lg border border-border bg-secondary/40 p-5 text-sm text-muted-foreground">
-          Das Kontakt- und Anfrageformular mit Spam-Schutz (Turnstile) folgt in Phase 2/3.
-          Bis dahin erreichen Sie uns telefonisch oder per E-Mail.
-        </p>
+        <div className="mt-12 border-t border-border pt-10">
+          <h2 className="font-heading text-2xl font-bold">Schreiben Sie uns</h2>
+          <p className="mt-2 text-muted-foreground">
+            Wir antworten in der Regel innerhalb eines Werktags. Für konkrete Rundflug-Anfragen mit
+            Wunschziel und Termin nutzen Sie am besten das{' '}
+            <a href="/kontakt/anfrage/" className="font-medium text-accent hover:underline">Anfrageformular</a>.
+          </p>
+          <div className="mt-6">
+            <KontaktForm />
+          </div>
+        </div>
       </section>
     </>
   );
