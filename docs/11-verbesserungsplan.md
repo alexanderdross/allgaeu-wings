@@ -89,12 +89,24 @@ sichtbare Breadcrumbs auf tiefen Seiten. `docs/10-roadmap.md` als veraltet aktua
 
 ## Stufe B, Baubar, Go-live braucht Config/Keys
 
-- **B1. Echter Mailversand der Formulare.** `/api/kontakt` und `/api/anfrage` loggen nur
-  (`delivered:false`). `worker-mailer` einbauen (nur Workers-Runtime; via `build:cf`/Preview
-  verifizieren). Braucht `SMTP_*`.
-- **B2. Turnstile echte Schlüssel.** Code steht; `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
-  (Build-Var) + `TURNSTILE_SECRET_KEY` (Runtime) im Cloudflare-Dashboard setzen (aktuell
-  Testschlüssel, kein echter Schutz).
+**Stand 21.08.2026:** B1 ist umgesetzt (PR #23, CI grün, Merge ausstehend). B2 ist reine
+Konfiguration (kein Code). B3/B4/B5 offen.
+
+- **B1. Echter Mailversand der Formulare. ✅ (PR #23)** `/api/kontakt` und `/api/anfrage`
+  versenden jetzt per `worker-mailer` eine E-Mail an `SHOP_EMAIL_TO` (Reply-To auf den
+  Absender), statt nur zu loggen. Ohne gesetzte `SMTP_*` bleibt `delivered:false` und die
+  Eingabe wird weiterhin protokolliert, es geht also nichts verloren. Helfer:
+  `src/lib/mailer.ts` (dynamischer Import, hält `cloudflare:sockets` aus dem Node-Build).
+  Toolchain-Detail: `worker-mailer` importiert `cloudflare:sockets`; das aktuelle
+  `@opennextjs/cloudflare` (1.20, wrangler 3) externalisiert `cloudflare:*` im Server-Bundle
+  nicht, daher ein minimaler committeter `pnpm patch`
+  (`patches/@opennextjs__cloudflare@1.20.2.patch`), der `cloudflare:*` als esbuild-external
+  markiert. Entfällt bei einem Toolchain-Upgrade (wrangler 4 / neueres OpenNext).
+  **Offen (Config):** `SMTP_HOST/PORT/USER/PASS` und `SHOP_EMAIL_TO` im Cloudflare-Dashboard
+  setzen (Vorlage `.dev.vars.example`), dann per `pnpm preview` real testen.
+- **B2. Turnstile echte Schlüssel.** Reine Konfiguration, kein Code. Code steht;
+  `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (Build-Var) + `TURNSTILE_SECRET_KEY` (Runtime) im
+  Cloudflare-Dashboard setzen (aktuell Testschlüssel, kein echter Schutz).
 - **B3. Stripe scharfschalten + Webhook + Gutschein-Lifecycle.** Checkout ist 503-gated.
   Fehlt (docs/07): `app/api/webhooks/stripe/route.ts`, KV-Idempotenz, D1-Schema
   (`vouchers`, `redemptions`, `booking_requests`, `webhook_events`), Gutschein-Code
