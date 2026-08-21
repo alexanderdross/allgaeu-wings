@@ -31,7 +31,7 @@ export function SiteHeader() {
                 {item.children && <ChevronDown className="h-3.5 w-3.5" aria-hidden />}
               </Link>
               {item.children && (
-                <div className="invisible absolute left-0 top-full min-w-56 rounded-md border border-border bg-card p-1 opacity-0 shadow-lg transition-all group-hover:visible group-hover:opacity-100">
+                <div className="invisible absolute left-0 top-full min-w-56 rounded-md border border-border bg-card p-1 opacity-0 shadow-lg transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   {item.children.map((child) => (
                     <Link
                       key={child.href}

@@ -46,8 +46,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="de" className={`${outfit.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col">
         <SiteJsonLd />
+        <a
+          href="#main"
+          className="sr-only rounded-md bg-accent px-4 py-2 text-accent-foreground focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          Zum Inhalt springen
+        </a>
         <SiteHeader />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">{children}</main>
         <SiteFooter />
       </body>
     </html>
