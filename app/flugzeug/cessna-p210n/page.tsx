@@ -4,6 +4,7 @@ import { Plane } from 'lucide-react';
 import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
 import { flugzeug } from '@/data/flights';
+import { business } from '@/data/business';
 
 export const metadata: Metadata = {
   title: 'Cessna P210N, unser Flugzeug für Alpen-Rundflüge',
@@ -13,9 +14,25 @@ export const metadata: Metadata = {
   alternates: { canonical: '/flugzeug/cessna-p210n/' },
 };
 
+const flugzeugJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: flugzeug.name,
+  category: 'Flugzeug',
+  description: flugzeug.beschreibung,
+  brand: { '@type': 'Brand', name: 'Cessna' },
+  url: `${business.siteUrl}/flugzeug/cessna-p210n/`,
+  additionalProperty: flugzeug.specs.map((s) => ({
+    '@type': 'PropertyValue',
+    name: s.label,
+    value: s.value,
+  })),
+};
+
 export default function FlugzeugPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(flugzeugJsonLd) }} />
       <PageHeader title={flugzeug.name} lead={flugzeug.typ} />
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-3 lg:px-8">
         <div className="lg:col-span-2">

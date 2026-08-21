@@ -45,10 +45,24 @@ const faqs = [
   },
 ];
 
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Flugangstseminar',
+  serviceType: 'Flugangstseminar',
+  description:
+    'Seminar zum Verstehen und Überwinden von Flugangst mit Psychologen, Piloten und Ingenieuren, ' +
+    'inklusive Flug zum Abschluss.',
+  provider: { '@type': 'Organization', name: business.name, url: business.siteUrl },
+  areaServed: 'DE',
+  url: `${business.siteUrl}/flugerlebnisse/flugangstseminar/`,
+};
+
 export default function FlugangstseminarPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(faqJsonLd(faqs))} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(serviceJsonLd)} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLdScript(
