@@ -229,6 +229,7 @@ export const flugzeug: Flugzeug = {
   specs: [
     { label: 'Typ', value: 'Hochdecker mit Druckkabine' },
     { label: 'Passagiere', value: 'bis zu 3' },
+    { label: 'Reisegeschwindigkeit', value: 'rund 330 bis 355 km/h (179 bis 191 kn)' },
     { label: 'Einsatz', value: 'Alpen-Rundflüge, Charter, IFR' },
   ],
 };
