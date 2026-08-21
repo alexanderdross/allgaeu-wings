@@ -146,7 +146,9 @@ Root, CLAUDE.md „hreflang/en/ vorbereitet, ungebaut"). Die Alt-Seite hatte ber
    Rechtstexte aktuell als „Entwurf" markiert.
 3. **Preis-Diskrepanz** Mont Blanc / Dolomiten-Gardasee: 489 € (Regiondo, ganze Buchung)
    vs. 444 € p. P. (alte WP).
-4. **Personenzahl je Flug** / `maxPassagiere` (`flights.ts` TODO).
+4. ~~**Personenzahl je Flug** / `maxPassagiere`~~ **geklärt (21.08.2026):** bis zu 5 Passagiere
+   plus Pilot (6 Sitze). In `flights.ts`, Cessna-Specs, FAQ und Taxiflug übernommen; das
+   Anfrageformular begrenzt die Personenauswahl auf 5.
 5. **Buchungstelefon** +49 8387 3924328 vs. HQ 08387 391-0 abgleichen.
 6. **Kontakt-E-Mail** `info@allgaeu-wings.de` bestätigen (`business.ts` TODO).
 7. **Luftrecht/Versicherung/Wetterstorno**-Bedingungen (Betrieb) → FAQ/AGB-Inhalt.

@@ -26,7 +26,7 @@ const faqs = [
   {
     frage: 'Wie viele Personen können mitfliegen?',
     antwort:
-      'An Bord der Cessna P210N können bis zu drei Gäste mitfliegen. Ab vier Personen haben Sie das Flugzeug für sich, sprechen Sie uns dazu einfach an.',
+      'An Bord der Cessna P210N können bis zu fünf Gäste mitfliegen, dazu kommt der Pilot. Für größere Gruppen sprechen Sie uns gern an, wir finden eine Lösung.',
   },
   {
     frage: 'Was passiert bei schlechtem Wetter?',
