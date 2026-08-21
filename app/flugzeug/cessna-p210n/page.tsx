@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Plane } from 'lucide-react';
+import Image from 'next/image';
 import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
 import { flugzeug } from '@/data/flights';
 import { business } from '@/data/business';
+import cessnaBild from '../../../public/img/flugzeug/cessna-p210n.jpg';
 
 export const metadata: Metadata = {
   title: 'Cessna P210N, unser Flugzeug für Alpen-Rundflüge',
@@ -21,6 +22,7 @@ const flugzeugJsonLd = {
   category: 'Flugzeug',
   description: flugzeug.beschreibung,
   brand: { '@type': 'Brand', name: 'Cessna' },
+  image: `${business.siteUrl}/img/flugzeug/cessna-p210n.jpg`,
   url: `${business.siteUrl}/flugzeug/cessna-p210n/`,
   additionalProperty: flugzeug.specs.map((s) => ({
     '@type': 'PropertyValue',
@@ -37,12 +39,15 @@ export default function FlugzeugPage() {
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-3 lg:px-8">
         <div className="lg:col-span-2">
           <p className="text-lg text-muted-foreground">{flugzeug.beschreibung}</p>
-          <div className="mt-8 flex aspect-[16/9] items-center justify-center rounded-lg bg-gradient-to-br from-primary to-[#2a5a8f]">
-            <Plane className="h-16 w-16 text-white/80" aria-hidden />
+          <div className="mt-8 overflow-hidden rounded-lg border border-border">
+            <Image
+              src={cessnaBild}
+              alt="Cessna P210N der Allgäu Wings im Flug über den Alpen"
+              placeholder="blur"
+              sizes="(min-width: 1024px) 66vw, 100vw"
+              className="h-auto w-full"
+            />
           </div>
-          <p className="mt-3 text-xs text-muted-foreground">
-            Bildmaterial folgt in Phase 2 (Motive in extract/assets vorhanden).
-          </p>
         </div>
         <aside>
           <div className="rounded-lg border border-border bg-card p-6">

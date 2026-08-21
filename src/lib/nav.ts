@@ -63,6 +63,7 @@ export const footerNav = {
       { label: 'A320 Flugsimulator', href: '/flugerlebnisse/a320-flugsimulator/' },
       { label: 'Flugangstseminar', href: '/flugerlebnisse/flugangstseminar/' },
       { label: 'Gutscheine', href: '/gutscheine/' },
+      { label: 'Galerie', href: '/galerie/' },
       { label: 'FAQ', href: '/faq/' },
       { label: 'Hubschrauber oder Flugzeug?', href: '/ratgeber/hubschrauber-oder-flugzeug-rundflug/' },
     ],
