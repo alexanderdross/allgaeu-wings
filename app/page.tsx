@@ -23,10 +23,11 @@ export default function HomePage() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Overlay für Textlesbarkeit (Text links, Motiv rechts). */}
+        {/* Overlay für Textlesbarkeit (Text links, Motiv rechts), dezenter,
+            damit das Foto deutlicher durchkommt. */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/70 to-primary/20"
+          className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/40 to-transparent"
         />
         <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
           <span className="rounded-full bg-white/10 px-3 py-1 text-sm font-medium">
@@ -37,7 +38,7 @@ export default function HomePage() {
           </h1>
           <p className="max-w-2xl text-lg text-white/80">
             Rundflüge zur Zugspitze, zum Matterhorn und Mont Blanc, über Bodensee, Dolomiten und
-            Gardasee — an Bord der Cessna P210N mit Druckkabine.
+            Gardasee, an Bord der Cessna P210N mit Druckkabine.
           </p>
           <div className="flex flex-wrap gap-3">
             <Button asChild variant="accent" size="lg">
@@ -76,7 +77,7 @@ export default function HomePage() {
         <div className="mb-10 max-w-2xl">
           <h2 id="ziele-heading" className="font-heading text-3xl font-bold">Unsere Rundflüge</h2>
           <p className="mt-3 text-muted-foreground">
-            Von der Zugspitze bis zum Mont Blanc — wählen Sie Ihr Ziel und buchen Sie online.
+            Von der Zugspitze bis zum Mont Blanc, wählen Sie Ihr Ziel und buchen Sie online.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -114,7 +115,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 lg:px-8">
           <h2 className="font-heading text-3xl font-bold">Verschenken Sie ein Flugerlebnis</h2>
           <p className="mx-auto mt-3 max-w-xl text-white/80">
-            Rundflug-Gutscheine sind das perfekte Geschenk — flexibel einlösbar und drei Jahre gültig.
+            Rundflug-Gutscheine sind das perfekte Geschenk, flexibel einlösbar und drei Jahre gültig.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild variant="accent" size="lg">

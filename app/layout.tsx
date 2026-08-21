@@ -6,7 +6,7 @@ import { SiteFooter } from '@/components/site-footer';
 import { SiteJsonLd } from '@/components/site-jsonld';
 import { business } from '@/data/business';
 
-// next/font lädt die Schriften zur Build-Zeit und hostet sie selbst — keine
+// next/font lädt die Schriften zur Build-Zeit und hostet sie selbst, keine
 // Laufzeit-Anfrage an Google (DSGVO-konform). Siehe docs/02-design-system.md.
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap' });
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
 export const metadata: Metadata = {
   metadataBase: new URL(business.siteUrl),
   title: {
-    default: 'Allgäu Wings — Alpen-Rundflüge ab Memmingen & Friedrichshafen',
+    default: 'Allgäu Wings, Alpen-Rundflüge ab Memmingen & Friedrichshafen',
     template: '%s | Allgäu Wings',
   },
   description:

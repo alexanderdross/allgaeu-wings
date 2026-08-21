@@ -1,4 +1,4 @@
-# CLAUDE.md — Allgäu Wings
+# CLAUDE.md, Allgäu Wings
 
 Arbeitsanweisung für Claude Code in diesem Repository. Kurzreferenz; die **Quelle der Wahrheit für
 alle Entscheidungen** ist `docs/`.
@@ -67,13 +67,13 @@ pnpm test         # Vitest
 Diese sind auf dem Workers-Runtime **nicht optional** (Herleitung `01-architektur.md`,
 erprobt in `drossnet`):
 
-1. **Middleware = `middleware.ts` (Edge)**, nie Next 16s `proxy.ts` (Node) – Adapter lehnt Node ab.
+1. **Middleware = `middleware.ts` (Edge)**, nie Next 16s `proxy.ts` (Node), Adapter lehnt Node ab.
 2. **OG-Bilder** (`opengraph-image.tsx`) mit `export const runtime = 'nodejs'`.
 3. **Bilder:** Custom `next/image`-Loader → Cloudflare Image Transformations (aus drossnet
    übernehmen). Fallback: Originale ausliefern.
 4. **E-Mail: `worker-mailer`**, **nie nodemailer** (SMTP-Sockets laufen nicht auf Workers).
 5. **Rate-Limiting bleibt In-Memory** (per Isolate). KV taugt nicht für atomare Fenster.
-6. **`trailingSlash: true`** – deckungsgleich mit Alt-URLs.
+6. **`trailingSlash: true`**, deckungsgleich mit Alt-URLs.
 7. **Webhook-Idempotenz doppelt:** KV (Replay) **und** Stripe-Metadaten/D1 (dauerhaft).
 8. **Runtime-Vars im Cloudflare-Dashboard** (`keep_vars: true`), lokal `.dev.vars`.
 
@@ -89,8 +89,15 @@ erprobt in `drossnet`):
 ## Content & Daten
 
 - Single Source of Truth: `src/data/flights.ts` (Ziele=Produkte, Standorte, Flugzeug, Preise).
-- **Preise/Flugzeiten aus `extract/shop/produkte.md` – nichts schätzen.** Fehlt der Wert: `TODO`.
+- **Preise/Flugzeiten aus `extract/shop/produkte.md`, nichts schätzen.** Fehlt der Wert: `TODO`.
 - Bilingual-Helfer und Datei-Struktur nach `drossnet/src/data/flightData.ts` (hier zunächst nur DE).
+
+## Schreibstil
+
+- **Keine Gedankenstriche.** Weder Geviertstrich (em dash, `U+2014`) noch Halbgeviertstrich
+  (en dash, `U+2013`) als Satzzeichen, in keinem nutzersichtbaren Text, Kommentar oder Markdown.
+  Stattdessen Komma, Doppelpunkt, Klammern oder zwei Sätze. Der normale Bindestrich `-` (`U+002D`)
+  in Komposita und Bezeichnern (`Bodensee-Rundflug`, `next-sitemap`, `D-EBRH`) bleibt erlaubt.
 
 ## Accessibility
 
@@ -101,14 +108,14 @@ Menü-Schließen, Tastaturnavigation, `prefers-reduced-motion`, Fokus-Ringe (`ri
 
 - Entwicklungsbranch: `claude/allgaeu-wings-nextjs-redesign-ao2lre`.
 - Aussagekräftige Commits; **kein PR ohne ausdrückliche Anweisung**.
-- `alexanderdross/drossnet` ist eine **read-only Referenz** – niemals verändern.
+- `alexanderdross/drossnet` ist eine **read-only Referenz**, niemals verändern.
 - Modell-/Tool-Identifier gehören nicht in Commits oder Repo-Artefakte.
 
 ## Wichtige Rahmenbedingungen
 
-- **USt-Satz und Widerrufsrecht sind fachlich offen** (`08-recht-compliance.md`) –
+- **USt-Satz und Widerrufsrecht sind fachlich offen** (`08-recht-compliance.md`), 
   `STRIPE_AUTOMATIC_TAX=false` bis geklärt.
-- **Die Alt-Seite hat ein ungültiges TLS-Zertifikat** – nach Cutover über Cloudflare managed.
+- **Die Alt-Seite hat ein ungültiges TLS-Zertifikat**, nach Cutover über Cloudflare managed.
 - **Bestehende Regiondo-Gutscheine bleiben einlösbar** (Import in D1, Runbook Phase 5).
 - **Bindings phasenweise:** Statische Bilder laufen über `ASSETS`, **nicht** R2. Da die Seite
   aktuell statisch ist, ist `ASSETS` das einzige aktive Binding; R2 (Seiten-Cache), KV

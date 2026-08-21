@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const s = getStandort(slug);
   if (!s) return { title: 'Standort nicht gefunden', robots: 'noindex' };
   return {
-    title: `Rundflüge ab ${s.name} (${s.icao}) — ${s.airport}`,
+    title: `Rundflüge ab ${s.name} (${s.icao}), ${s.airport}`,
     description: `Alpen-Rundflüge ab ${s.airport}. ${s.beschreibung}`,
     alternates: { canonical: `/standorte/${s.id}/` },
   };
@@ -31,7 +31,7 @@ export default async function StandortDetail({ params }: { params: Promise<{ slu
   const localBusinessJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: `${business.name} — ${s.name}`,
+    name: `${business.name}, ${s.name}`,
     telephone: business.phone,
     url: `https://www.allgaeu-wings.de/standorte/${s.id}/`,
     address: { '@type': 'PostalAddress', addressLocality: s.name, addressCountry: 'DE' },

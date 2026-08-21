@@ -4,7 +4,7 @@ import { PageHeader } from '@/components/page-header';
 import { standorte } from '@/data/flights';
 
 export const metadata: Metadata = {
-  title: 'Unsere Standorte — Memmingen & Friedrichshafen',
+  title: 'Unsere Standorte, Memmingen & Friedrichshafen',
   description: 'Rundflüge ab Allgäu Airport Memmingen (EDJA) und Bodensee-Airport Friedrichshafen (EDNY).',
   alternates: { canonical: '/standorte/' },
 };

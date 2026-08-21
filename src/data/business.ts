@@ -1,4 +1,4 @@
-// Firmenidentität — belegt aus Impressum + Extraktion (extract/html/impressum.html).
+// Firmenidentität, belegt aus Impressum + Extraktion (extract/html/impressum.html).
 // Siehe docs/00-konzept.md.
 
 export const business = {

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { flugzeug } from '@/data/flights';
 
 export const metadata: Metadata = {
-  title: 'Cessna P210N — unser Flugzeug für Alpen-Rundflüge',
+  title: 'Cessna P210N, unser Flugzeug für Alpen-Rundflüge',
   description:
     'Die Cessna P210N Pressurized Centurion mit Druckkabine: das Reiseflugzeug für komfortable, ' +
     'hochalpine Rundflüge über die Alpen.',

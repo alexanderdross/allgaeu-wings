@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Clock, MapPin, Plane, Check, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const flug = getRundflug(slug);
   if (!flug) return { title: 'Rundflug nicht gefunden', robots: 'noindex' };
   return {
-    title: `${flug.name} — ${formatDauer(flug.flugzeitMin)} ab ${formatPreis(flug.preis)}`,
+    title: `${flug.name}, ${formatDauer(flug.flugzeitMin)} ab ${formatPreis(flug.preis)}`,
     description: flug.kurzbeschreibung,
     alternates: { canonical: `/rundfluege/${flug.slug}/` },
     openGraph: { title: flug.name, description: flug.kurzbeschreibung, type: 'website', locale: 'de_DE' },
@@ -68,7 +69,18 @@ export default async function RundflugDetail({ params }: { params: Promise<{ slu
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary to-[#0d2a4a] text-white">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+        {/* LCP-Bild der Route: statischer Import (auto Größe + Blur), priority. */}
+        <Image
+          src={flug.bild}
+          alt={`${flug.name}, Luftaufnahme der Region ${flug.region}`}
+          fill
+          priority
+          placeholder="blur"
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/55 to-primary/20" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
           <nav className="mb-4 text-sm text-white/60" aria-label="Brotkrumen">
             <Link href="/rundfluege/" className="hover:text-white">Rundflüge</Link>
             <span className="mx-2">/</span>
@@ -86,7 +98,13 @@ export default async function RundflugDetail({ params }: { params: Promise<{ slu
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-3 lg:px-8">
         <div className="lg:col-span-2">
-          <h2 className="font-heading text-2xl font-bold">Highlights dieser Route</h2>
+          <div className="max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
+            {flug.beschreibung.map((absatz, i) => (
+              <p key={i}>{absatz}</p>
+            ))}
+          </div>
+
+          <h2 className="mt-10 font-heading text-2xl font-bold">Highlights dieser Route</h2>
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
             {flug.highlights.map((h) => (
               <li key={h} className="flex items-start gap-2">

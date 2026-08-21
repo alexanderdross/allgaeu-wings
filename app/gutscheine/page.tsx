@@ -18,7 +18,7 @@ export default function GutscheinePage() {
     <>
       <PageHeader
         title="Rundflug-Gutscheine"
-        lead="Das perfekte Geschenk — flexibel einlösbar, drei Jahre gültig, für jedes Ziel."
+        lead="Das perfekte Geschenk, flexibel einlösbar, drei Jahre gültig, für jedes Ziel."
       />
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="mb-10 grid gap-6 sm:grid-cols-3">
@@ -55,7 +55,7 @@ export default function GutscheinePage() {
         <p className="mt-10 rounded-lg border border-border bg-secondary/40 p-5 text-sm text-muted-foreground">
           Der Kauf läuft über den sicheren Stripe-Checkout. Der automatische Versand von
           Gutscheincode und PDF (Webhook) wird mit dem Shop-Backend aktiviert
-          (siehe docs/07-shop-stripe.md) — bis dahin melden wir uns nach dem Kauf persönlich.
+          (siehe docs/07-shop-stripe.md), bis dahin melden wir uns nach dem Kauf persönlich.
         </p>
       </section>
     </>

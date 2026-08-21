@@ -1,4 +1,4 @@
-// Best-effort In-Memory-Rate-Limiter (per Isolate). Bewusst nicht in KV —
+// Best-effort In-Memory-Rate-Limiter (per Isolate). Bewusst nicht in KV, 
 // KV ist asynchron/eventually consistent und kann kein atomares Fenster
 // garantieren (siehe docs/01-architektur.md §Constraints).
 

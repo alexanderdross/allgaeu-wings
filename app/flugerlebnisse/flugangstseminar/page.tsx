@@ -7,10 +7,10 @@ import { breadcrumbJsonLd, faqJsonLd, jsonLdScript } from '@/lib/schema';
 import { business } from '@/data/business';
 
 export const metadata: Metadata = {
-  title: 'Flugangstseminar — Flugangst verstehen und überwinden',
+  title: 'Flugangstseminar, Flugangst verstehen und überwinden',
   description:
     'Flugangst ist weit verbreitet und lässt sich verlernen. Unser Seminar mit ausgebildeten ' +
-    'Psychologen, Piloten und Ingenieuren hilft Ihnen dabei — inklusive Flug zum Abschluss.',
+    'Psychologen, Piloten und Ingenieuren hilft Ihnen dabei, inklusive Flug zum Abschluss.',
   alternates: { canonical: '/flugerlebnisse/flugangstseminar/' },
 };
 
@@ -18,15 +18,15 @@ const themen = [
   'Subjektives vs. objektives Risiko: Wie sicher ist Fliegen wirklich?',
   'Mehr Verständnis zum Thema Technik',
   'Mehr Verständnis zum Thema Flugbetrieb',
-  'Verständnis für Gefahren beim Fliegen — und deren Sicherheitsmechanismen',
-  'Angst ist gelernt — und kann verlernt werden',
+  'Verständnis für Gefahren beim Fliegen, und deren Sicherheitsmechanismen',
+  'Angst ist gelernt, und kann verlernt werden',
 ];
 
 const faqs = [
   {
     frage: 'Ist Flugangst normal?',
     antwort:
-      'Ja. Studien belegen, dass Flugangst in verschiedenen Ausprägungen weit verbreitet ist — nur eine Minderheit der Passagiere fühlt sich auf Flügen absolut wohl. Angst ist eine natürliche Fähigkeit, die uns vor Gefahren schützt.',
+      'Ja. Studien belegen, dass Flugangst in verschiedenen Ausprägungen weit verbreitet ist, nur eine Minderheit der Passagiere fühlt sich auf Flügen absolut wohl. Angst ist eine natürliche Fähigkeit, die uns vor Gefahren schützt.',
   },
   {
     frage: 'Kann man Flugangst überwinden?',
@@ -62,19 +62,19 @@ export default function FlugangstseminarPage() {
 
       <PageHeader
         title="Flugangstseminar"
-        lead="Flugangst verstehen und überwinden — in professioneller, ruhiger Begleitung."
+        lead="Flugangst verstehen und überwinden, in professioneller, ruhiger Begleitung."
       />
 
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
           <p>
-            Flugangst wird schnell zum Hindernis — nämlich dann, wenn Sie fliegen möchten oder Ihre
+            Flugangst wird schnell zum Hindernis, nämlich dann, wenn Sie fliegen möchten oder Ihre
             Lebensumstände es erfordern. Wir möchten Ihnen helfen, dieses Hindernis zu überwinden,
             und werden dabei von ausgebildeten Psychologen unterstützt.
           </p>
           <p>
             Jede Angst hat eine ihr zugrunde liegende Ursache. Diese muss für jeden Menschen
-            individuell verstanden werden — genau dabei helfen wir Ihnen.
+            individuell verstanden werden, genau dabei helfen wir Ihnen.
           </p>
         </div>
 

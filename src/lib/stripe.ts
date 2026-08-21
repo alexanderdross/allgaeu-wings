@@ -2,7 +2,7 @@ import Stripe from 'stripe';
 
 let _stripe: Stripe | null = null;
 
-/** Lazy Stripe-Client. Wirft erst zur Laufzeit, wenn der Key fehlt — nie beim Build. */
+/** Lazy Stripe-Client. Wirft erst zur Laufzeit, wenn der Key fehlt, nie beim Build. */
 export function getStripe(): Stripe {
   if (!_stripe) {
     const key = process.env.STRIPE_SECRET_KEY;

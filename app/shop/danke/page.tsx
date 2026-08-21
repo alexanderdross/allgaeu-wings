@@ -15,7 +15,7 @@ export default function DankePage() {
       <h1 className="mt-6 font-heading text-3xl font-bold">Vielen Dank für Ihre Buchung!</h1>
       <p className="mt-4 text-muted-foreground">
         Ihre Zahlung war erfolgreich. Sie erhalten in Kürze eine Bestätigung per E-Mail. Wir stimmen
-        den Flugtermin anschließend gemeinsam mit Ihnen ab — Rundflüge sind wetterabhängig.
+        den Flugtermin anschließend gemeinsam mit Ihnen ab, Rundflüge sind wetterabhängig.
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Button asChild variant="accent">
