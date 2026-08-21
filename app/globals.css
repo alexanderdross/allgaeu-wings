@@ -62,7 +62,8 @@
     --destructive-foreground: 0 0% 100%;
 
     --border: 210 16% 90%;
-    --input: 210 16% 88%;
+    /* Formularfelder: dunklerer Rand fuer klar sichtbaren Kontrast auf Weiss. */
+    --input: 214 15% 68%;
     --ring: 204 88% 56%;
 
     --radius: 0.5rem;
