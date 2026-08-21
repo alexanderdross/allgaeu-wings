@@ -2,10 +2,10 @@
 
 Priorisierter Plan für die nächsten Änderungen an der neuen Website, datengetrieben
 aus der GSC-Auswertung (`data/gsc/`) und dem Ist-Stand des Codes. Erstellt nach
-Abschluss von Phase 1–2 (Inhalte, Basis-SEO, Formulare) und Teilen von Phase 3
+Abschluss von Phase 1 bis 2 (Inhalte, Basis-SEO, Formulare) und Teilen von Phase 3
 (Checkout-Grundgerüst).
 
-## Ausgangslage (GSC 19.05.–18.08.2026)
+## Ausgangslage (GSC 19.05. bis 18.08.2026)
 
 828 Klicks / 15.867 Impressionen / Ø Position 12,4 · 71 % mobil · 93 % Deutschland ·
 **84 % non-branded**. Zwei Kernprobleme steuern die Priorität:
@@ -13,16 +13,21 @@ Abschluss von Phase 1–2 (Inhalte, Basis-SEO, Formulare) und Teilen von Phase 3
 1. **Kannibalisierung:** Die Startseite zieht allein **8.102 Impressionen auf Ø Pos. 15**
    und rankt breit für Ziel-Suchbegriffe, für die es keine fokussierte Landingpage gibt.
 2. **Indexierung nur ~30 %** (43 „gefunden, nicht indexiert" + 25 „gecrawlt, nicht
-   indexiert") — dünne/duplizierte Inhalte und schwache interne Verlinkung.
+   indexiert"), dünne/duplizierte Inhalte und schwache interne Verlinkung.
 
 Gliederung in Stufen: **A** sofort umsetzbar (kein Business-Input nötig), **B** baubar,
 Go-live braucht Config/Keys, **C** fachlich/rechtlich blockiert (nur klären).
 
 ---
 
-## Stufe A — Sofort umsetzbar, hoher Hebel
+## Stufe A, Sofort umsetzbar, hoher Hebel ✅ abgeschlossen
 
-### A1. `/rundfluege/alpen/` Landingpage (größter GSC-Hebel)
+**Stand 21.08.2026: Stufe A ist komplett umgesetzt und in `main` gemergt** (PRs #16, #18, #19,
+#20, #21). Zusätzlich im Zuge von A7 zwei Formular-Korrekturen: Taxiflug als Option im
+Anfrageformular, Personenauswahl auf maximal 5 begrenzt. Wirkung (Indexierung, Positionen der
+neuen Seiten) über die nächsten 2 bis 4 Wochen in der GSC beobachten.
+
+### A1. ✅ `/rundfluege/alpen/` Landingpage (größter GSC-Hebel)
 Cluster „alpen*" (`alpenrundflug` 471, `rundflug alpen` 306, `alpen rundflug` 179,
 `alpenrundflüge` 153 …) = **~3.170 Impressionen ohne eigene Seite**, absorbiert von `/`.
 Eigene Kategorie-/Übersichtsseite für den Kopf-Begriff „Alpenrundflug", die auf die
@@ -30,14 +35,14 @@ konkreten Ziel-Detailseiten verlinkt (interne Verlinkung gegen Kannibalisierung)
 - Neu: `app/rundfluege/alpen/page.tsx` (`ItemList` + `BreadcrumbList`, Einleitung,
   Karten der alpinen Flüge). Verlinkung in `src/lib/nav.ts` und im `/rundfluege/` Hub.
 
-### A2. Ratgeber „Hubschrauber oder Flugzeug-Rundflug?"
+### A2. ✅ Ratgeber „Hubschrauber oder Flugzeug-Rundflug?"
 Helikopter-Intent (`hubschrauber/helikopter rundflug alpen …`) = **~2.820 Impressionen**,
 viele 0 Klicks, Intent-Mismatch (Betrieb fliegt Tragflächen-Cessna). Ehrliche
 Vergleichs-/Ratgeberseite, die diese Suchenden abholt und auf die Rundflüge leitet.
 - Neu: `app/ratgeber/hubschrauber-oder-flugzeug-rundflug/page.tsx` (docs/04 §1), mit
   `FAQPage`/`Article`-Schema und internen Links.
 
-### A3. Schema.org vervollständigen (Rich Results)
+### A3. ✅ Schema.org vervollständigen (Rich Results)
 Helfer in `src/lib/schema.ts` erweitern (aktuell nur `breadcrumbJsonLd`, `faqJsonLd`):
 - **`TouristAttraction`** auf Rundflug-Detailseiten + Product-`image` aus `flug.bild`.
 - **Product/Vehicle** auf der Cessna-Seite (aktuell kein JSON-LD).
@@ -46,20 +51,20 @@ Helfer in `src/lib/schema.ts` erweitern (aktuell nur `breadcrumbJsonLd`, `faqJso
 - **`BreadcrumbList`** auf dem `/rundfluege/` Hub; **`geo` + `openingHours`** im
   `LocalBusiness` der Standortseiten.
 
-### A4. Cessna-Flugzeugseite mit echtem Foto + Specs
+### A4. ✅ Cessna-Flugzeugseite mit echtem Foto + Specs
 Platzhalter-Gradient ersetzen (echtes Motiv aus `extract/assets`, next/image, statischer
-Import). Specs ergänzen, u. a. Reisegeschwindigkeit **~330–355 km/h (179–191 kn)**.
+Import). Specs ergänzen, u. a. Reisegeschwindigkeit **~330 bis 355 km/h (179 bis 191 kn)**.
 `src/data/flights.ts` `Flugzeug.specs` erweitern.
 
-### A5. Galerie befüllen (statt Stub)
+### A5. ✅ Galerie befüllen (statt Stub)
 `app/galerie/page.tsx` mit Fotos aus `extract/assets` und dem Erklärvideo als
 `VideoObject`-Schema füllen.
 
-### A6. Allgemeine FAQ-Seite
+### A6. ✅ Allgemeine FAQ-Seite
 Neu: `app/faq/page.tsx` mit `FAQPage`-Schema (Wetter/Stornierung, was mitbringen,
 Gewicht/Personen, Ablauf, Gutschein-Einlösung).
 
-### A7. Accessibility & UX
+### A7. ✅ Accessibility & UX
 - Nav-Dropdowns tastatur-/fokusbedienbar (aktuell nur `group-hover`, kein `aria-expanded`).
 - Skip-to-content-Link + `id="main"` auf `<main>`.
 - Sticky Mobile-CTA auf Produktseiten (71 % Mobil-Traffic).
@@ -67,22 +72,22 @@ Gewicht/Personen, Ablauf, Gutschein-Einlösung).
   serverseitig verifizieren (analog `/api/kontakt`).
 - Fokus-Rückgabe auf die Erfolgsmeldung nach Submit.
 
-### A8. Index-Hygiene / interne Verlinkung
+### A8. ✅ Index-Hygiene / interne Verlinkung
 Kontextuelle interne Links (Hub → Detail, Ratgeber/FAQ → Rundflüge, Standort → Flüge),
 sichtbare Breadcrumbs auf tiefen Seiten. `docs/10-roadmap.md` als veraltet aktualisieren
-(Phase 1–2 sind gebaut).
+(Phase 1 bis 2 sind gebaut).
 
-### A9. Regionale Longtail-Seiten (nachrangig)
+### A9. ✅ Regionale Longtail-Seiten (nachrangig)
 0-Klick-Impressionen mit Nachfrage ohne Seite: `rundflug schloss neuschwanstein` (70),
 `alpenrundflug münchen/bayern` (83/79), `rundflug chiemsee` (46), `rundflug tegernsee`
-(19). Als leichte Content-Abschnitte ergänzen, wenn A1–A8 stehen.
+(19). Als leichte Content-Abschnitte ergänzen, wenn A1 bis A8 stehen.
 
 **Reihenfolge nach Hebel:** A1 → A3 → A2 → A4/A5 → A6/A7 → A8 → A9. Je Block ein PR nach
 `main`, Build/Typecheck/Lint grün, lokal (Desktop + Mobil) geprüft.
 
 ---
 
-## Stufe B — Baubar, Go-live braucht Config/Keys
+## Stufe B, Baubar, Go-live braucht Config/Keys
 
 - **B1. Echter Mailversand der Formulare.** `/api/kontakt` und `/api/anfrage` loggen nur
   (`delivered:false`). `worker-mailer` einbauen (nur Workers-Runtime; via `build:cf`/Preview
@@ -101,7 +106,7 @@ sichtbare Breadcrumbs auf tiefen Seiten. `docs/10-roadmap.md` als veraltet aktua
 ### B5. Mehrsprachigkeit / Übersetzung (Deutsch + Englisch)
 Deutsch bleibt Root **ohne** Präfix, Englisch kommt unter **`/en/`** (docs/04 §Deutsch als
 Root, CLAUDE.md „hreflang/en/ vorbereitet, ungebaut"). Die Alt-Seite hatte bereits EN-Seiten
-(`/imprint`, `/267-2/book-a-scenic-flight`) — Redirects zeigen aktuell nur auf DE.
+(`/imprint`, `/267-2/book-a-scenic-flight`), Redirects zeigen aktuell nur auf DE.
 
 - **Routing:** App-Router-i18n mit Default-Locale `de` (kein Präfix) und `en` unter `/en/…`.
   Umsetzung z. B. über ein `locale`-Segment oder Locale-aware Rewrites in `middleware.ts`
@@ -122,7 +127,7 @@ Root, CLAUDE.md „hreflang/en/ vorbereitet, ungebaut"). Die Alt-Seite hatte ber
 
 ---
 
-## Stufe C — Fachlich/rechtlich blockiert (nur klären)
+## Stufe C, Fachlich/rechtlich blockiert (nur klären)
 
 1. **USt-Satz** (Steuerberater) → blockiert Stripe-Tax.
 2. **Widerrufsrecht** für undatierte Gutscheine (Anwalt) → blockiert finale AGB;
@@ -144,5 +149,5 @@ Root, CLAUDE.md „hreflang/en/ vorbereitet, ungebaut"). Die Alt-Seite hatte ber
 - Schema gegen Google Rich-Results-Test / Schema-Validator prüfen; nach Deploy per
   GSC-URL-Prüfung.
 - SEO-Wirkung: nach Merge Sitemap in der GSC einreichen und Indexierung/Position der
-  neuen Seiten (`/rundfluege/alpen/`, Ratgeber, FAQ) über 2–4 Wochen beobachten.
+  neuen Seiten (`/rundfluege/alpen/`, Ratgeber, FAQ) über 2 bis 4 Wochen beobachten.
 - CWV: nach B4 Lighthouse-Budget in CI; Mobile-LCP < 2,5 s auf der Startseite.

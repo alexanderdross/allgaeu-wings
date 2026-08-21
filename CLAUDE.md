@@ -11,8 +11,12 @@ Workers**, mit **nativem Stripe-Shop** statt des bisherigen Regiondo-iframes. Co
 bleibt, Design wird behutsam modernisiert. Architektur-Vorbild: die Dross:Air-Sektion in
 `alexanderdross/drossnet`.
 
-**Status:** Phase 0 (Konzept & Datenbasis). Dieses Repo enthält aktuell **nur Dokumentation**,
-noch keinen Anwendungscode. Scaffold = Phase 1 (`docs/10-roadmap.md`).
+**Status:** Phasen 0 bis 2 umgesetzt, die Seite läuft live auf
+`allgaeu-wings.allgaeuwings.workers.dev` (noch nicht auf der Zieldomain). Phase 3 ist teilweise
+gebaut (Kontakt- und Anfrageformular mit Turnstile, Stripe-Checkout als Gerüst, 503-gated ohne
+Keys). **Stufe A des Verbesserungsplans (`docs/11-verbesserungsplan.md`) ist abgeschlossen.**
+Offen: Stripe-Webhook und Gutschein-Lifecycle (D1/KV), Cutover, Stufe B/C. Reihenfolge und
+Ist-Stand in `docs/10-roadmap.md` und `docs/11-verbesserungsplan.md`.
 
 ## Dokumentations-Index (`docs/`)
 
@@ -29,6 +33,7 @@ noch keinen Anwendungscode. Scaffold = Phase 1 (`docs/10-roadmap.md`).
 | `08-recht-compliance.md` | DSGVO, Widerruf, USt, Button-Lösung, Regiondo-Exit |
 | `09-migration-runbook.md` | Cloudflare-Setup, Cutover, Redirects, Rollback |
 | `10-roadmap.md` | Phasen, Reihenfolge, Aufwand |
+| `11-verbesserungsplan.md` | Priorisierter Verbesserungsplan (SEO/Funktion/UX), Stufen A/B/C |
 
 Daten: `data/gsc/` (Search-Console-Exporte). Rohextraktion der Alt-Seite: `extract/` (siehe
 `09-migration-runbook.md` Phase 0).
