@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,12 @@ const inputClass =
 export function KontaktForm() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const doneRef = useRef<HTMLHeadingElement>(null);
+
+  // Fokus nach erfolgreichem Absenden auf die Bestätigung setzen.
+  useEffect(() => {
+    if (status === 'done') doneRef.current?.focus();
+  }, [status]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -48,7 +54,9 @@ export function KontaktForm() {
     return (
       <div className="rounded-lg border border-border bg-card p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-accent" aria-hidden />
-        <h2 className="mt-4 font-heading text-xl font-semibold">Vielen Dank für Ihre Nachricht!</h2>
+        <h2 ref={doneRef} tabIndex={-1} className="mt-4 font-heading text-xl font-semibold focus:outline-none">
+          Vielen Dank für Ihre Nachricht!
+        </h2>
         <p className="mt-2 text-muted-foreground">Wir melden uns zeitnah bei Ihnen.</p>
       </div>
     );

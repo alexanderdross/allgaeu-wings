@@ -98,7 +98,7 @@ export default async function RundflugDetail({ params }: { params: Promise<{ slu
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-3 lg:px-8">
+      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 pb-28 sm:px-6 lg:grid-cols-3 lg:px-8 lg:pb-16">
         <div className="lg:col-span-2">
           <div className="max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
             {flug.beschreibung.map((absatz, i) => (
@@ -150,6 +150,18 @@ export default async function RundflugDetail({ params }: { params: Promise<{ slu
           </div>
         </aside>
       </section>
+
+      {/* Sticky Mobile-CTA: 71 % der Zugriffe sind mobil (docs/03). Auf großen
+          Screens übernimmt das Buchungs-Panel in der Seitenspalte. */}
+      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-3 border-t border-border bg-card/95 px-4 py-3 shadow-[0_-2px_10px_rgba(0,0,0,0.08)] backdrop-blur lg:hidden">
+        <div>
+          <p className="text-xs text-muted-foreground">Preis ganze Buchung</p>
+          <p className="font-heading text-lg font-bold text-primary">{formatPreis(flug.preis)}</p>
+        </div>
+        <div className="shrink-0">
+          <CheckoutButton slug={flug.slug} />
+        </div>
+      </div>
     </>
   );
 }

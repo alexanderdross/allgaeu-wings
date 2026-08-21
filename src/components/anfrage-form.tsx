@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Turnstile } from '@/components/turnstile';
 import { rundfluege } from '@/data/flights';
 
 const inputClass =
@@ -11,6 +13,13 @@ const inputClass =
 export function AnfrageForm() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const doneRef = useRef<HTMLHeadingElement>(null);
+
+  // Fokus nach erfolgreichem Absenden auf die Bestätigung setzen, damit
+  // Screenreader- und Tastaturnutzer die Rückmeldung erhalten.
+  useEffect(() => {
+    if (status === 'done') doneRef.current?.focus();
+  }, [status]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,10 +43,12 @@ export function AnfrageForm() {
       } else {
         setStatus('error');
         setMessage(data.error ?? 'Es ist ein Fehler aufgetreten.');
+        window.turnstile?.reset();
       }
     } catch {
       setStatus('error');
       setMessage('Netzwerkfehler. Bitte später erneut versuchen.');
+      window.turnstile?.reset();
     }
   }
 
@@ -45,7 +56,9 @@ export function AnfrageForm() {
     return (
       <div className="rounded-lg border border-border bg-card p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-accent" aria-hidden />
-        <h2 className="mt-4 font-heading text-xl font-semibold">Vielen Dank für Ihre Anfrage!</h2>
+        <h2 ref={doneRef} tabIndex={-1} className="mt-4 font-heading text-xl font-semibold focus:outline-none">
+          Vielen Dank für Ihre Anfrage!
+        </h2>
         <p className="mt-2 text-muted-foreground">Wir melden uns zeitnah bei Ihnen.</p>
       </div>
     );
@@ -59,19 +72,25 @@ export function AnfrageForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block">
           <span className="mb-1 block text-sm font-medium">Name *</span>
-          <input name="name" required maxLength={200} className={inputClass} />
+          <input name="name" required maxLength={200} autoComplete="name" className={inputClass} />
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-medium">E-Mail *</span>
-          <input name="email" type="email" required maxLength={320} className={inputClass} />
+          <input name="email" type="email" required maxLength={320} autoComplete="email" className={inputClass} />
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-medium">Telefon</span>
-          <input name="phone" type="tel" maxLength={50} className={inputClass} />
+          <input name="phone" type="tel" maxLength={50} autoComplete="tel" className={inputClass} />
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-medium">Personen</span>
-          <input name="personen" type="number" min={1} max={6} defaultValue={2} className={inputClass} />
+          <select name="personen" className={inputClass} defaultValue="2">
+            {[1, 2, 3, 4, 5].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
         </label>
         <label className="block">
           <span className="mb-1 block text-sm font-medium">Wunsch-Rundflug</span>
@@ -82,6 +101,7 @@ export function AnfrageForm() {
                 {f.name}
               </option>
             ))}
+            <option value="Taxiflug">Taxiflug</option>
             <option value="Wunschrundflug">Individueller Wunschrundflug</option>
           </select>
         </label>
@@ -95,6 +115,19 @@ export function AnfrageForm() {
         <span className="mb-1 block text-sm font-medium">Nachricht</span>
         <textarea name="nachricht" rows={4} maxLength={5000} className={inputClass} />
       </label>
+
+      <label className="flex items-start gap-2 text-sm text-muted-foreground">
+        <input type="checkbox" name="datenschutz" required value="ja" className="mt-1" />
+        <span>
+          Ich habe die{' '}
+          <Link href="/rechtliches/datenschutz/" className="font-medium text-accent hover:underline">
+            Datenschutzerklärung
+          </Link>{' '}
+          gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden. *
+        </span>
+      </label>
+
+      <Turnstile />
 
       {status === 'error' && (
         <p role="alert" className="text-sm text-destructive">{message}</p>
