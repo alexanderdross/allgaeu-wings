@@ -1,6 +1,6 @@
 // Gemeinsame PWA-Anzeigemodus-Helfer. Quelle der Wahrheit fuer die Frage
 // "laeuft die Seite als installierte PWA?", genutzt vom PWA-Zurueck-Button und
-// vom Ladescreen. Architektur-Vorbild: drossnet/src/components/pwa/standalone.ts.
+// vom Ladescreen.
 
 /** True auf iOS Safari (iPad/iPhone/iPod), ohne IE-Mobile. SSR-sicher. */
 export function isIos(): boolean {

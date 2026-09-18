@@ -5,7 +5,7 @@
 // Unterseite navigiert, kaeme sonst nicht zurueck). Er sitzt links vom Logo, ist
 // versteckt, wenn es nichts zum Zurueckgehen gibt, und ruft nur history.back().
 // Im normalen Browser rendert er null, das Header-HTML bleibt also unveraendert
-// (dieselbe selbst-gatende null-Logik wie in drossnet).
+// (selbst-gatende null-Logik, kein dynamic(ssr:false) noetig).
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';

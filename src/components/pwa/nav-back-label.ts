@@ -1,7 +1,6 @@
 // Eigenstaendiges Label-Glossar fuer den PWA-Zurueck-Button. Die Sprache kommt
 // aus der URL (DE als Root, /en/ vorbereitet, siehe CLAUDE.md "SEO-Konventionen"),
-// nicht aus React-Context. Fuegt bewusst keine Schluessel zu Content-Daten hinzu
-// (Doktrin aus drossnet/src/components/pwa/nav-back-label.ts).
+// nicht aus React-Context. Fuegt bewusst keine Schluessel zu Content-Daten hinzu.
 
 const NAV_BACK_LABEL = {
   de: 'Zurück',
