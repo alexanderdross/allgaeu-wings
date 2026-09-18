@@ -5,6 +5,7 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteJsonLd } from '@/components/site-jsonld';
 import { PwaSplash } from '@/components/pwa/pwa-splash';
+import { IosSplashLinks } from '@/components/pwa/ios-splash-links';
 import { business } from '@/data/business';
 
 // next/font lädt die Schriften zur Build-Zeit und hostet sie selbst, keine
@@ -60,6 +61,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de" className={`${outfit.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col">
+        {/* iOS-Launch-Screens; React hebt die <link>-Tags in den <head>. */}
+        <IosSplashLinks />
         {/* Synchron vor dem ersten Paint: markiert den Standalone-Modus fuer iOS
             (navigator.standalone), damit der Ladescreen sofort greift. Moderne
             Browser decken das zusaetzlich per (display-mode: standalone) ab. */}

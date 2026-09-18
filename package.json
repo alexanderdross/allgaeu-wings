@@ -12,7 +12,8 @@
     "onlyBuiltDependencies": [
       "workerd",
       "esbuild",
-      "unrs-resolver"
+      "unrs-resolver",
+      "sharp"
     ],
     "patchedDependencies": {
       "@opennextjs/cloudflare@1.20.2": "patches/@opennextjs__cloudflare@1.20.2.patch"
@@ -28,7 +29,8 @@
     "deploy": "opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "gen:ios-splash": "node scripts/generate-ios-splash.mjs"
   },
   "dependencies": {
     "@radix-ui/react-navigation-menu": "^1.2.5",
@@ -56,6 +58,7 @@
     "eslint": "^9.18.0",
     "eslint-config-next": "^15.1.6",
     "postcss": "^8.5.1",
+    "sharp": "0.34.5",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.3",
     "wrangler": "^3.100.0"

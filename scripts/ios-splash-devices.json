@@ -1,0 +1,23 @@
+{
+  "comment": "Geraeteliste fuer iOS apple-touch-startup-image (Launch-Screens). cssW/cssH = CSS-Punkte (orientierungsunabhaengig, wie von pwa-asset-generator genutzt), dpr = devicePixelRatio. Portraet-Pixel = cssW*dpr x cssH*dpr, Landscape spiegelt die Kanten. Quelle: gaengige iPhone/iPad-Aufloesungen. Bei neuen Geraeten hier ergaenzen und `pnpm gen:ios-splash` laufen lassen.",
+  "devices": [
+    { "label": "iPhone SE (1. Gen), 5/5s", "cssW": 320, "cssH": 568, "dpr": 2 },
+    { "label": "iPhone 8, SE (2./3. Gen)", "cssW": 375, "cssH": 667, "dpr": 2 },
+    { "label": "iPhone 8 Plus", "cssW": 414, "cssH": 736, "dpr": 3 },
+    { "label": "iPhone X/XS/11 Pro, 12/13 mini", "cssW": 375, "cssH": 812, "dpr": 3 },
+    { "label": "iPhone XR/11", "cssW": 414, "cssH": 896, "dpr": 2 },
+    { "label": "iPhone XS Max/11 Pro Max", "cssW": 414, "cssH": 896, "dpr": 3 },
+    { "label": "iPhone 12/13/14", "cssW": 390, "cssH": 844, "dpr": 3 },
+    { "label": "iPhone 12/13 Pro Max, 14 Plus", "cssW": 428, "cssH": 926, "dpr": 3 },
+    { "label": "iPhone 14 Pro, 15/15 Pro, 16", "cssW": 393, "cssH": 852, "dpr": 3 },
+    { "label": "iPhone 14 Pro Max, 15 Plus/Pro Max, 16 Plus", "cssW": 430, "cssH": 932, "dpr": 3 },
+    { "label": "iPhone 16 Pro", "cssW": 402, "cssH": 874, "dpr": 3 },
+    { "label": "iPhone 16 Pro Max", "cssW": 440, "cssH": 956, "dpr": 3 },
+    { "label": "iPad mini/Air 9.7, iPad", "cssW": 768, "cssH": 1024, "dpr": 2 },
+    { "label": "iPad 10.2", "cssW": 810, "cssH": 1080, "dpr": 2 },
+    { "label": "iPad Air 10.9", "cssW": 820, "cssH": 1180, "dpr": 2 },
+    { "label": "iPad Pro 10.5", "cssW": 834, "cssH": 1112, "dpr": 2 },
+    { "label": "iPad Pro 11", "cssW": 834, "cssH": 1194, "dpr": 2 },
+    { "label": "iPad Pro 12.9, Air 13", "cssW": 1024, "cssH": 1366, "dpr": 2 }
+  ]
+}
