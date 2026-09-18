@@ -1,7 +1,6 @@
 # Dependabot: hält npm-Abhängigkeiten und die GitHub-Actions-Versionen aktuell.
 #
-# Lauf alle zwei Wochen: am 1. und 15. um 06:00 Europe/Berlin (Standard-Cron kennt
-# kein echtes "alle 14 Tage", 1./15. ist die übliche zweiwöchentliche Näherung).
+# Zeitplan: monatlich (Dependabot kennt nativ nur daily/weekly/monthly).
 #
 # cooldown.default-days: 14  ->  Dependabot schlägt eine Version erst vor, wenn sie
 # mindestens zwei Wochen veröffentlicht ist. Damit landet nie ein Framework-Update
@@ -12,8 +11,7 @@ updates:
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'cron'
-      cron: '0 6 1,15 * *'
+      interval: 'monthly'
       timezone: 'Europe/Berlin'
     cooldown:
       default-days: 14
@@ -42,8 +40,7 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'cron'
-      cron: '0 6 1,15 * *'
+      interval: 'monthly'
       timezone: 'Europe/Berlin'
     cooldown:
       default-days: 14
