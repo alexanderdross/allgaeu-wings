@@ -1,0 +1,48 @@
+# Dependabot: hält npm-Abhängigkeiten und die GitHub-Actions-Versionen aktuell.
+#
+# Zeitplan: monatlich (Dependabot kennt nativ nur daily/weekly/monthly).
+#
+# cooldown.default-days: 14  ->  Dependabot schlägt eine Version erst vor, wenn sie
+# mindestens zwei Wochen veröffentlicht ist. Damit landet nie ein Framework-Update
+# (next, react, tailwindcss ...) jünger als zwei Wochen im PR; frisch veröffentlichte,
+# evtl. fehlerhafte Releases reifen erst.
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+      timezone: 'Europe/Berlin'
+    cooldown:
+      default-days: 14
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'chore(deps)'
+      prefix-development: 'chore(deps-dev)'
+    groups:
+      # Weniger PR-Rauschen: zusammengehörige Pakete in je einem PR bündeln.
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
+      next:
+        patterns:
+          - 'next'
+          - 'eslint-config-next'
+          - '@opennextjs/*'
+      tailwind:
+        patterns:
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+      timezone: 'Europe/Berlin'
+    cooldown:
+      default-days: 14
+    commit-message:
+      prefix: 'ci(actions)'
