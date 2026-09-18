@@ -1,9 +1,11 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Outfit, Inter } from 'next/font/google';
 import './globals.css';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteJsonLd } from '@/components/site-jsonld';
+import { PwaSplash } from '@/components/pwa/pwa-splash';
+import { IosSplashLinks } from '@/components/pwa/ios-splash-links';
 import { business } from '@/data/business';
 
 // next/font lädt die Schriften zur Build-Zeit und hostet sie selbst, keine
@@ -39,12 +41,38 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: '/apple-icon-180x180.png', sizes: '180x180' }],
   },
+  // Damit iOS die Seite vom Home-Screen im Standalone-Modus oeffnet (Basis fuer
+  // PWA-Zurueck-Button und Ladescreen). Das Manifest verlinkt Next automatisch
+  // aus app/manifest.ts.
+  appleWebApp: {
+    capable: true,
+    title: 'Allgäu Wings',
+    statusBarStyle: 'default',
+  },
+};
+
+export const viewport: Viewport = {
+  // Adressleisten-/Statusbar-Farbe = Marineblau (CI), deckungsgleich mit dem
+  // theme_color des Manifests und dem Ladescreen-Hintergrund.
+  themeColor: '#173f68',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className={`${outfit.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col">
+        {/* iOS-Launch-Screens; React hebt die <link>-Tags in den <head>. */}
+        <IosSplashLinks />
+        {/* Synchron vor dem ersten Paint: markiert den Standalone-Modus fuer iOS
+            (navigator.standalone), damit der Ladescreen sofort greift. Moderne
+            Browser decken das zusaetzlich per (display-mode: standalone) ab. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true){document.documentElement.setAttribute('data-standalone','')}}catch(e){}",
+          }}
+        />
+        <PwaSplash />
         <SiteJsonLd />
         <a
           href="#main"
