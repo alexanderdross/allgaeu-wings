@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { mainNav } from '@/lib/nav';
 import { Button } from '@/components/ui/button';
+import { PwaBackButton } from '@/components/pwa/pwa-back-button';
 import { cn } from '@/lib/utils';
 
 export function SiteHeader() {
@@ -14,10 +15,14 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-primary text-primary-foreground shadow-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2" aria-label="Allgäu Wings Startseite">
-          <Image src="/logo.png" alt="Allgäu Wings" width={62} height={36} priority className="h-9 w-auto" />
-          <span className="font-heading text-lg font-bold tracking-wide">ALLGÄU WINGS</span>
-        </Link>
+        <div className="flex min-w-0 items-center gap-1">
+          {/* Nur in der installierten PWA sichtbar, sonst rendert er null. */}
+          <PwaBackButton />
+          <Link href="/" className="flex items-center gap-2" aria-label="Allgäu Wings Startseite">
+            <Image src="/logo.png" alt="Allgäu Wings" width={62} height={36} priority className="h-9 w-auto" />
+            <span className="font-heading text-lg font-bold tracking-wide">ALLGÄU WINGS</span>
+          </Link>
+        </div>
 
         {/* Desktop-Navigation */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Hauptnavigation">
